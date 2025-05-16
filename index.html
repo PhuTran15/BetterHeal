@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Sản Phẩm</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Quản Lý Cửa Hàng</div>
+            <div class="menu-bar">
+                <button class="menu-btn active" data-tab="products">Sản Phẩm</button>
+                <button class="menu-btn" data-tab="notes">Ghi Chú</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Tab Sản phẩm -->
+        <div id="productsTab" class="tab-content active">
+            <div class="add-product-form">
+                <h2>Thêm Sản Phẩm Mới</h2>
+                <form id="productForm">
+                    <div class="form-group">
+                        <label for="productName">Tên sản phẩm:</label>
+                        <input type="text" id="productName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productPrice">Giá (VNĐ):</label>
+                        <input type="number" id="productPrice" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productNote">Ghi chú:</label>
+                        <textarea id="productNote" rows="3"></textarea>
+                    </div>
+                    <button type="submit">Thêm sản phẩm</button>
+                </form>
+            </div>
+
+            <div class="products-list">
+                <h2>Danh Sách Sản Phẩm</h2>
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Tìm kiếm sản phẩm..."
+                        onkeyup="searchProducts()"
+                    >
+                </div>
+                <table class="products-table">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Ghi chú</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsList">
+                        <!-- Dữ liệu sản phẩm sẽ được thêm vào đây bằng JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="history-section">
+                <h2>Lịch Sử Thao Tác</h2>
+                <div id="historyList" class="history-list">
+                    <!-- Lịch sử sẽ được thêm vào đây bằng JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Ghi chú -->
+        <div id="notesTab" class="tab-content">
+            <div class="notes-section">
+                <h2>Ghi Chú</h2>
+                <form id="noteForm">
+                    <div class="form-group">
+                        <textarea id="noteContent" rows="6" placeholder="Nhập ghi chú của bạn..."></textarea>
+                    </div>
+                    <button type="submit">Lưu Ghi Chú</button>
+                </form>
+                <div id="notesList" class="notes-list">
+                    <!-- Danh sách ghi chú sẽ được thêm vào đây bằng JavaScript -->
+                </div>
+            </div>
+
+            <div class="history-section">
+                <h2>Lịch Sử Ghi Chú</h2>
+                <div id="noteHistoryList" class="history-list">
+                    <!-- Lịch sử ghi chú sẽ được thêm vào đây -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h2>Sửa Sản Phẩm</h2>
+            <form id="editForm">
+                <div class="form-group">
+                    <label for="editProductName">Tên sản phẩm:</label>
+                    <input type="text" id="editProductName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editProductPrice">Giá (VNĐ):</label>
+                    <input type="number" id="editProductPrice" required>
+                </div>
+                <div class="form-group">
+                    <label for="editProductNote">Ghi chú:</label>
+                    <textarea id="editProductNote" rows="3"></textarea>
+                </div>
+                <button type="submit">Lưu thay đổi</button>
+                <button type="button" class="cancel-btn" onclick="closeEditModal()">Hủy</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html> 
