@@ -2,13 +2,14 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 import { getDatabase, ref, onValue, push, remove, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCjt85SL95xLWwPMjNBN4d6m8QlX9HLbfA",
-    authDomain: "my-store-test-83fc8.firebaseapp.com",
-    databaseURL: "https://my-store-test-83fc8-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "my-store-test-83fc8",
-    storageBucket: "my-store-test-83fc8.firebasestorage.app",
-    messagingSenderId: "209934286109",
-    appId: "1:209934286109:web:23413a66c499492ec1f5f4"
+    apiKey: "AIzaSyCEK54N506sR3dkYdhXtrP1mQPjz1QfVLg",
+  authDomain: "betterheal-117ed.firebaseapp.com",
+    databaseURL: "https://betterheal-117ed-default-rtdb.asia-southeast1.firebasedatabase.app", // Quan trọng
+  projectId: "betterheal-117ed",
+  storageBucket: "betterheal-117ed.firebasestorage.app",
+  messagingSenderId: "482091866987",
+  appId: "1:482091866987:web:51e473cd51db4f632b0a2e",
+  measurementId: "G-HSBSJ63EXT"
 };
 
 // Khởi tạo Firebase

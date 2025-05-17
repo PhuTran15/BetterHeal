@@ -3,124 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Sản Phẩm</title>
+    <title>BetterHeal - Nơi chữa lành tâm hồn</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <nav>
-            <div class="logo">Quản Lý Cửa Hàng</div>
-            <div class="menu-bar">
-                <button class="menu-btn active" data-tab="products">Sản Phẩm</button>
-                <button class="menu-btn" data-tab="notes">Ghi Chú</button>
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-heart"></i> BetterHeal
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link active">Trang chủ</a></li>
+                <li><a href="feelings.html" class="nav-link">Nỗi lòng</a></li>
+                <li><a href="#" class="nav-link disabled">Nhật ký</a></li>
+                <li><a href="#" class="nav-link disabled">Thiền</a></li>
+                <li><a href="#" class="nav-link disabled">Tâm sự</a></li>
+            </ul>
+            <div id="authButtons" class="auth-container">
+                <a href="login.html" class="btn">Đăng nhập</a>
+                <a href="register.html" class="btn btn-secondary">Đăng ký</a>
+            </div>
+            <div id="userInfo" class="user-info" style="display: none;">
+                <span class="username">User</span>
+                <button id="logoutBtn" class="logout-btn">Đăng xuất</button>
             </div>
         </nav>
     </header>
 
     <main>
-        <!-- Tab Sản phẩm -->
-        <div id="productsTab" class="tab-content active">
-            <div class="add-product-form">
-                <h2>Thêm Sản Phẩm Mới</h2>
-                <form id="productForm">
-                    <div class="form-group">
-                        <label for="productName">Tên sản phẩm:</label>
-                        <input type="text" id="productName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="productPrice">Giá (VNĐ):</label>
-                        <input type="number" id="productPrice" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="productNote">Ghi chú:</label>
-                        <textarea id="productNote" rows="3"></textarea>
-                    </div>
-                    <button type="submit">Thêm sản phẩm</button>
-                </form>
-            </div>
-
-            <div class="products-list">
-                <h2>Danh Sách Sản Phẩm</h2>
-                <div class="search-box">
-                    <input 
-                        type="text" 
-                        id="searchInput" 
-                        placeholder="Tìm kiếm sản phẩm..."
-                        onkeyup="searchProducts()"
-                    >
-                </div>
-                <table class="products-table">
-                    <thead>
-                        <tr>
-                            <th>STT</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Giá</th>
-                            <th>Ghi chú</th>
-                            <th>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody id="productsList">
-                        <!-- Dữ liệu sản phẩm sẽ được thêm vào đây bằng JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="history-section">
-                <h2>Lịch Sử Thao Tác</h2>
-                <div id="historyList" class="history-list">
-                    <!-- Lịch sử sẽ được thêm vào đây bằng JavaScript -->
+        <section class="hero-section">
+            <div class="container">
+                <h1>Chào mừng đến với BetterHeal</h1>
+                <p class="hero-text">Nơi bạn có thể chia sẻ, kết nối và chữa lành tâm hồn</p>
+                <div class="hero-buttons">
+                    <a href="feelings.html" class="btn btn-accent">Chia sẻ nỗi lòng</a>
+                    <a href="#features" class="btn">Tìm hiểu thêm</a>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Tab Ghi chú -->
-        <div id="notesTab" class="tab-content">
-            <div class="notes-section">
-                <h2>Ghi Chú</h2>
-                <form id="noteForm">
-                    <div class="form-group">
-                        <textarea id="noteContent" rows="6" placeholder="Nhập ghi chú của bạn..."></textarea>
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2 class="section-title">Các tính năng</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Nỗi lòng</h3>
+                        <p>Chia sẻ những cảm xúc, nỗi lòng của bạn và nhận được sự đồng cảm, hỗ trợ từ cộng đồng.</p>
+                        <a href="feelings.html" class="feature-link">Khám phá ngay</a>
                     </div>
-                    <button type="submit">Lưu Ghi Chú</button>
-                </form>
-                <div id="notesList" class="notes-list">
-                    <!-- Danh sách ghi chú sẽ được thêm vào đây bằng JavaScript -->
+                    <div class="feature-card disabled">
+                        <div class="feature-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>Nhật ký</h3>
+                        <p>Ghi lại cảm xúc, suy nghĩ hàng ngày để theo dõi hành trình phát triển bản thân.</p>
+                        <span class="coming-soon">Sắp ra mắt</span>
+                    </div>
+                    <div class="feature-card disabled">
+                        <div class="feature-icon">
+                            <i class="fas fa-om"></i>
+                        </div>
+                        <h3>Thiền</h3>
+                        <p>Các bài tập thiền định giúp bạn thư giãn, giảm căng thẳng và cải thiện sức khỏe tinh thần.</p>
+                        <span class="coming-soon">Sắp ra mắt</span>
+                    </div>
+                    <div class="feature-card disabled">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Tâm sự</h3>
+                        <p>Kết nối với những người có cùng trải nghiệm, chia sẻ và học hỏi từ nhau.</p>
+                        <span class="coming-soon">Sắp ra mắt</span>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="history-section">
-                <h2>Lịch Sử Ghi Chú</h2>
-                <div id="noteHistoryList" class="history-list">
-                    <!-- Lịch sử ghi chú sẽ được thêm vào đây -->
-                </div>
+        <section class="about-section">
+            <div class="container">
+                <h2 class="section-title">Về BetterHeal</h2>
+                <p>BetterHeal là nơi bạn có thể chia sẻ những cảm xúc, nỗi lòng và nhận được sự đồng cảm, hỗ trợ từ cộng đồng. Chúng tôi tin rằng việc chia sẻ là bước đầu tiên để chữa lành.</p>
+                <p>Tại đây, bạn có thể:</p>
+                <ul class="about-list">
+                    <li>Chia sẻ cảm xúc, nỗi lòng một cách ẩn danh hoặc công khai</li>
+                    <li>Nhận được sự đồng cảm, hỗ trợ từ cộng đồng</li>
+                    <li>Gửi lời động viên, chia sẻ đến những người đang cần</li>
+                    <li>Tìm kiếm sự bình yên và chữa lành cho tâm hồn</li>
+                </ul>
             </div>
-        </div>
+        </section>
     </main>
 
-    <div id="editModal" class="modal">
-        <div class="modal-content">
-            <h2>Sửa Sản Phẩm</h2>
-            <form id="editForm">
-                <div class="form-group">
-                    <label for="editProductName">Tên sản phẩm:</label>
-                    <input type="text" id="editProductName" required>
-                </div>
-                <div class="form-group">
-                    <label for="editProductPrice">Giá (VNĐ):</label>
-                    <input type="number" id="editProductPrice" required>
-                </div>
-                <div class="form-group">
-                    <label for="editProductNote">Ghi chú:</label>
-                    <textarea id="editProductNote" rows="3"></textarea>
-                </div>
-                <button type="submit">Lưu thay đổi</button>
-                <button type="button" class="cancel-btn" onclick="closeEditModal()">Hủy</button>
-            </form>
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 BetterHeal. Tất cả quyền được bảo lưu.</p>
         </div>
-    </div>
+    </footer>
 
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js"></script>
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script type="module" src="js/main_new.js"></script>
+    <script type="module" src="js/redirect.js"></script>
 </body>
-</html> 
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetterHeal - Trang chủ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <header>
+        <a href="dashboard.html" class="logo">
+            <i class="fas fa-heart"></i> BetterHeal
+        </a>
+        <div class="user-info" id="userInfo">
+            <span class="username">Xin chào, <span id="usernameDisplay">Người dùng</span></span>
+            <button id="logoutBtn" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="welcome-section">
+            <h1>Chào mừng đến với BetterHeal</h1>
+            <p>Nơi bạn có thể chia sẻ, kết nối và chăm sóc sức khỏe tinh thần của mình. Hãy chọn một trong các tính năng dưới đây để bắt đầu.</p>
+        </section>
+
+        <section class="features-grid">
+            <div class="feature-card" onclick="window.location.href='feelings.html'">
+                <i class="fas fa-heart"></i>
+                <h2>Nỗi lòng</h2>
+                <p>Chia sẻ cảm xúc, nỗi lòng của bạn và nhận sự đồng cảm, hỗ trợ từ cộng đồng.</p>
+                <a href="feelings.html" aria-label="Truy cập tính năng Nỗi lòng">Truy cập</a>
+            </div>
+
+            <div class="feature-card" onclick="window.location.href='journal.html'">
+                <i class="fas fa-book"></i>
+                <h2>Nhật ký</h2>
+                <p>Ghi lại suy nghĩ, cảm xúc hàng ngày để theo dõi và cải thiện sức khỏe tinh thần.</p>
+                <a href="journal.html" aria-label="Truy cập tính năng Nhật ký">Truy cập</a>
+            </div>
+
+            <div class="feature-card" onclick="window.location.href='meditation.html'">
+                <i class="fas fa-om"></i>
+                <h2>Thiền</h2>
+                <p>Thực hành thiền định để thư giãn, giảm căng thẳng và cải thiện sự tập trung.</p>
+                <a href="meditation.html" aria-label="Truy cập tính năng Thiền">Truy cập</a>
+            </div>
+
+            <div class="feature-card" onclick="window.location.href='community.html'">
+                <i class="fas fa-users"></i>
+                <h2>Tâm sự</h2>
+                <p>Kết nối với những người có cùng trải nghiệm và chia sẻ câu chuyện của bạn.</p>
+                <a href="community.html" aria-label="Truy cập tính năng Tâm sự">Truy cập</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 BetterHeal. Tất cả quyền được bảo lưu.</p>
+    </footer>
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

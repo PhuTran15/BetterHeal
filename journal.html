@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhật ký - BetterHeal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles for journal page */
+        .journal-section {
+            padding: 2rem 0;
+        }
+
+        .journal-form {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .journal-entry {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .journal-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .journal-date {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .journal-mood {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .journal-mood i {
+            color: var(--accent-color);
+        }
+
+        .journal-content {
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        .mood-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .mood-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .mood-option:hover {
+            background-color: rgba(91, 138, 114, 0.1);
+        }
+
+        .mood-option.selected {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .mood-option i {
+            font-size: 1.2rem;
+        }
+
+        .coming-soon {
+            text-align: center;
+            padding: 4rem 2rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .coming-soon h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .coming-soon i {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="dashboard.html" class="logo">
+                <i class="fas fa-heart"></i> BetterHeal
+            </a>
+            <div id="authButtons" class="auth-container">
+                <a href="login.html" class="btn">Đăng nhập</a>
+                <a href="register.html" class="btn btn-secondary">Đăng ký</a>
+            </div>
+            <div id="userInfo" class="user-info" style="display: none;">
+                <span class="username">User</span>
+                <button id="logoutBtn" class="logout-btn">Đăng xuất</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="journal-section">
+            <div class="container">
+                <h1 class="section-title">Nhật ký</h1>
+                <p class="section-description">Ghi lại cảm xúc, suy nghĩ hàng ngày để theo dõi hành trình phát triển bản thân.</p>
+
+                <div class="coming-soon">
+                    <i class="fas fa-tools"></i>
+                    <h2>Tính năng đang được phát triển</h2>
+                    <p>Chúng tôi đang nỗ lực phát triển tính năng Nhật ký để mang đến trải nghiệm tốt nhất cho bạn. Vui lòng quay lại sau!</p>
+                    <a href="dashboard.html" class="btn">Quay lại trang chủ</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 BetterHeal. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        import { checkAuth, getCurrentUser, updateUIOnAuth } from "./js/auth.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDQJgBZxUQkfG0iCRR1BUBWxKxDZpqc90Y",
+            authDomain: "betterheal-blog.firebaseapp.com",
+            projectId: "betterheal-blog",
+            storageBucket: "betterheal-blog.appspot.com",
+            messagingSenderId: "1058240258413",
+            appId: "1:1058240258413:web:d1c9a7a4c5fb5ef93b6b2e"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Document ready
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if user is logged in
+            if (!checkAuth()) {
+                return;
+            }
+
+            // Update UI based on auth state
+            updateUIOnAuth();
+
+            // Setup logout functionality
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', async () => {
+                    try {
+                        // Sign out from Firebase Auth
+                        await signOut(auth);
+
+                        // Remove user info from localStorage
+                        localStorage.removeItem('currentUser');
+
+                        // Redirect to login page
+                        window.location.href = 'login.html';
+                    } catch (error) {
+                        console.error('Logout failed:', error);
+                        alert('Đăng xuất thất bại. Vui lòng thử lại.');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
