@@ -1,6 +1,5 @@
 // Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -15,20 +14,36 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+initializeApp(firebaseConfig);
 
 // Get current user from localStorage
 function getCurrentUser() {
     return JSON.parse(localStorage.getItem('currentUser'));
 }
 
-// Check if user is logged in and redirect to dashboard
+// Check user authentication status and redirect accordingly
 document.addEventListener('DOMContentLoaded', () => {
     const currentUser = getCurrentUser();
+    const currentPath = window.location.pathname;
+    const isLandingPage = currentPath === '/' ||
+                          currentPath === '/index.html' ||
+                          currentPath.endsWith('/');
 
     // If user is logged in and we're on the landing page, redirect to dashboard
-    if (currentUser && (window.location.pathname === '/' || window.location.pathname === '/index.html')) {
+    if (currentUser && isLandingPage) {
         window.location.href = 'dashboard.html';
+    }
+    // If user is NOT logged in and we're on the landing page, redirect to login
+    else if (!currentUser && isLandingPage) {
+        window.location.href = 'login.html';
+    }
+    // If user is NOT logged in and trying to access protected pages, redirect to login
+    else if (!currentUser &&
+            (currentPath.includes('dashboard.html') ||
+             currentPath.includes('feelings.html') ||
+             currentPath.includes('journal.html') ||
+             currentPath.includes('meditation.html') ||
+             currentPath.includes('community.html'))) {
+        window.location.href = 'login.html';
     }
 });
