@@ -1,19 +1,19 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js';
+// import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
+// import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js';
 
 // Firebase config
-const firebaseConfig = {
-    apiKey: "AIzaSyDSzFT32QJNv_0H_jLw6CASZdD0gJTE-Uw",
-    authDomain: "betterheal-d59e9.firebaseapp.com",
-    databaseURL: "https://betterheal-d59e9-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "betterheal-d59e9",
-    storageBucket: "betterheal-d59e9.firebasestorage.app",
-    messagingSenderId: "1069393133390",
-    appId: "1:1069393133390:web:e0e8e8e8e8e8e8e8e8e8e8"
-};
+// const firebaseConfig = {
+//     apiKey: "AIzaSyDSzFT32QJNv_0H_jLw6CASZdD0gJTE-Uw",
+//     authDomain: "betterheal-d59e9.firebaseapp.com",
+//     databaseURL: "https://betterheal-d59e9-default-rtdb.asia-southeast1.firebasedatabase.app",
+//     projectId: "betterheal-d59e9",
+//     storageBucket: "betterheal-d59e9.firebasestorage.app",
+//     messagingSenderId: "1069393133390",
+//     appId: "1:1069393133390:web:e0e8e8e8e8e8e8e8e8e8e8"
+// };
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+// const app = initializeApp(firebaseConfig);
+// const db = getDatabase(app);
 
 // Get menu ID from current page
 function getCurrentMenuId() {
@@ -26,7 +26,8 @@ function getCurrentMenuId() {
         'meditation.html': 'meditation',
         'chat.html': 'chat',
         'merry-christmas.html': 'christmas',
-        'christmas-wishes-admin.html': 'christmas-wishes'
+        'christmas-wishes-admin.html': 'christmas-wishes',
+        'thuong-em.html': 'thuong-em'
     };
     
     return menuMap[filename] || null;
@@ -35,6 +36,7 @@ function getCurrentMenuId() {
 // Check if password is required
 async function checkPasswordRequired() {
     const menuId = getCurrentMenuId();
+    console.log("Current menu ID:", menuId);
     if (!menuId) return; // Not a protected page
 
     // Check if user is admin
@@ -44,18 +46,17 @@ async function checkPasswordRequired() {
     }
 
     // Check if password is enabled for this menu
-    const passwordRef = ref(db, `menuPasswords/${menuId}`);
-    const snapshot = await get(passwordRef);
-    const passwordData = snapshot.val();
-
+    // const passwordRef = ref(db, `menuPasswords/${menuId}`);
+    // const snapshot = await get(passwordRef);
+    // const passwordData = snapshot.val();
+    const passwordData = { enabled: true, password: "281015" };
     if (passwordData && passwordData.enabled) {
         // Check if user has already entered password in this session
         const sessionKey = `menu_password_${menuId}`;
         const sessionPassword = sessionStorage.getItem(sessionKey);
-
-        if (sessionPassword === passwordData.password) {
-            return; // Password already verified
-        }
+        // if (sessionPassword === passwordData.password) {
+        //     return; // Password already verified
+        // }
 
         // Show password prompt
         showPasswordPrompt(menuId, passwordData.password);
@@ -179,7 +180,7 @@ function addPasswordModalStyles() {
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(100px);
             display: flex;
             align-items: center;
             justify-content: center;
