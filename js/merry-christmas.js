@@ -248,6 +248,7 @@ function createWishFormSlide() {
             <div class="wish-slide-icon">⭐</div>
             <h3 class="wish-slide-title">Điều ước đêm Noel</h3>
             <p class="wish-form-subtitle">Hãy gửi điều ước của bạn đến ông già Noel 🎅</p>
+            <p class="wish-form-subtitle">(Thật ra chạ có ông già Noel nào ở đây hết, chỉ có anh hoi)</p>
 
             <form id="christmasWishForm" class="christmas-wish-form-inline">
                 <div class="form-group-inline">
