@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Điều ước Noel - Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/christmas-wishes-admin.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <meta name="theme-color" content="#c94b4b">
+</head>
+<body>
+    <!-- Snow effect -->
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+    </div>
+
+    <header>
+        <a href="merry-christmas.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Quay lại
+        </a>
+        <h1><i class="fas fa-star"></i> Điều ước Noel</h1>
+        <div class="user-info" id="userInfo">
+            <span class="username">Admin: <span id="usernameDisplay">Người dùng</span></span>
+            <button id="logoutBtn" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="admin-container">
+            <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="totalWishes">0</div>
+                        <div class="stat-label">Tổng điều ước</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="todayWishes">0</div>
+                        <div class="stat-label">Hôm nay</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="uniqueUsers">0</div>
+                        <div class="stat-label">Người dùng</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wishes-list-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-list"></i> Danh sách điều ước</h2>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">
+                            <i class="fas fa-globe"></i> Tất cả
+                        </button>
+                        <button class="filter-btn" data-filter="today">
+                            <i class="fas fa-calendar-day"></i> Hôm nay
+                        </button>
+                        <button class="filter-btn" data-filter="week">
+                            <i class="fas fa-calendar-week"></i> Tuần này
+                        </button>
+                    </div>
+                </div>
+
+                <div class="wishes-list" id="wishesList">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i> Đang tải...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+    <script type="module" src="js/christmas-wishes-admin.js"></script>
+</body>
+</html>
+

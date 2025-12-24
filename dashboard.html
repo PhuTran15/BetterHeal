@@ -6,17 +6,34 @@
     <title>BetterHeal - Trang chủ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/fixed-attendance.css">
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
     <meta name="theme-color" content="#5b8a72">
+    <style>
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+            }
+            70% {
+                transform: scale(1.1);
+                box-shadow: 0 0 0 5px rgba(220, 53, 69, 0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <a href="dashboard.html" class="logo">
             <i class="fas fa-heart"></i> BetterHeal
         </a>
+        <!-- Đã bỏ biểu tượng điểm danh ở header theo yêu cầu -->
         <div class="user-info" id="userInfo">
             <span class="username">Xin chào, <span id="usernameDisplay">Người dùng</span></span>
             <button id="logoutBtn" class="logout-btn">
@@ -46,11 +63,11 @@
                 <a href="journal.html" aria-label="Truy cập tính năng Nhật ký">Truy cập</a>
             </div>
 
-            <div class="feature-card" onclick="window.location.href='meditation.html'">
-                <i class="fas fa-om"></i>
-                <h2>Thiền</h2>
-                <p>Thực hành thiền định để thư giãn, giảm căng thẳng và cải thiện sự tập trung.</p>
-                <a href="meditation.html" aria-label="Truy cập tính năng Thiền">Truy cập</a>
+            <div class="feature-card" onclick="window.location.href='foryou.html'">
+                <i class="fas fa-gift"></i>
+                <h2>For You</h2>
+                <p>Những điều đặc biệt dành riêng cho bạn, nơi lưu giữ những khoảnh khắc ý nghĩa.</p>
+                <a href="foryou.html" aria-label="Truy cập tính năng For You">Truy cập</a>
             </div>
 
             <div class="feature-card" onclick="window.location.href='community.html'">
@@ -59,12 +76,24 @@
                 <p>Kết nối với những người có cùng trải nghiệm và chia sẻ câu chuyện của bạn.</p>
                 <a href="community.html" aria-label="Truy cập tính năng Tâm sự">Truy cập</a>
             </div>
+
+
         </section>
     </main>
 
     <footer>
         <p>&copy; 2023 BetterHeal. Tất cả quyền được bảo lưu.</p>
     </footer>
+
+    <div class="fixed-attendance-btn" id="fixedAttendanceBtn">
+        <a href="attendance.html" title="Điểm danh hàng ngày">
+            <div style="position: relative;">
+                <i class="fas fa-calendar-check"></i>
+                <div id="attendanceBadge" style="position: absolute; top: -10px; right: -10px; background-color: #e74c3c; color: white; width: 18px; height: 18px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 12px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2); animation: pulse 1.5s infinite;">!</div>
+            </div>
+            <span>Điểm danh</span>
+        </a>
+    </div>
 
     <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>

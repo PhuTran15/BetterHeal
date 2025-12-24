@@ -201,6 +201,7 @@ export function updateUIOnAuth() {
     const currentUser = getCurrentUser();
     const authButtons = document.getElementById('authButtons');
     const userInfo = document.getElementById('userInfo');
+    const menuPasswordLink = document.getElementById('menuPasswordLink');
 
     if (currentUser) {
         if (authButtons) authButtons.style.display = 'none';
@@ -208,11 +209,39 @@ export function updateUIOnAuth() {
             userInfo.style.display = 'flex';
             const usernameElement = userInfo.querySelector('.username');
             if (usernameElement) {
-                usernameElement.textContent = currentUser.username;
+                // Xử lý tên người dùng để hiển thị thân thiện hơn
+                let displayName = 'Người dùng';
+
+                if (currentUser.displayName) {
+                    displayName = currentUser.displayName;
+                } else if (currentUser.email && currentUser.email.includes('@')) {
+                    // Nếu là email, chỉ lấy phần tên trước @
+                    displayName = currentUser.email.split('@')[0];
+                } else if (currentUser.username) {
+                    displayName = currentUser.username;
+                }
+
+                usernameElement.textContent = displayName;
+            }
+
+            // Show menu password manager link for admin
+            if (menuPasswordLink) {
+                console.log('Current user:', currentUser);
+                console.log('Username:', currentUser.username);
+                if (currentUser.username === 'admin' || currentUser.username === 'thaonguyen') {
+                    console.log('Showing menu password link');
+                    menuPasswordLink.style.display = 'inline-flex';
+                } else {
+                    console.log('Hiding menu password link');
+                    menuPasswordLink.style.display = 'none';
+                }
+            } else {
+                console.log('menuPasswordLink element not found');
             }
         }
     } else {
         if (authButtons) authButtons.style.display = 'flex';
         if (userInfo) userInfo.style.display = 'none';
+        if (menuPasswordLink) menuPasswordLink.style.display = 'none';
     }
 }

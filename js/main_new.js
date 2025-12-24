@@ -41,7 +41,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentUser) {
         const usernameElement = document.querySelector('.username');
         if (usernameElement) {
-            usernameElement.textContent = currentUser.displayName || currentUser.username;
+            // Xử lý tên người dùng để hiển thị thân thiện hơn
+            let displayName = 'Người dùng';
+
+            if (currentUser.displayName) {
+                displayName = currentUser.displayName;
+            } else if (currentUser.email) {
+                // Nếu là email, chỉ lấy phần tên trước @
+                displayName = currentUser.email.split('@')[0];
+            } else if (currentUser.username) {
+                displayName = currentUser.username;
+            }
+
+            usernameElement.textContent = displayName;
         }
     }
 

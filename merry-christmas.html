@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merry Christmas - For You</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/merry-christmas.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <meta name="theme-color" content="#c94b4b">
+</head>
+<body>
+    <!-- Snow effect -->
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+    </div>
+
+    <header>
+        <a href="foryou.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Quay lại
+        </a>
+        <div class="user-info" id="userInfo">
+            <a href="christmas-wishes-admin.html" id="adminWishesLink" class="admin-link" style="display: none;">
+                <i class="fas fa-star"></i> Xem điều ước
+            </a>
+            <span class="username">Xin chào, <span id="usernameDisplay">Người dùng</span></span>
+            <button id="logoutBtn" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="christmas-container">
+            <!-- Christmas Card -->
+            <div class="christmas-card-wrapper" id="cardWrapper">
+                <!-- Card Cover (Front) -->
+                <div class="christmas-card-cover" id="cardCover">
+                    <div class="card-decoration">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h1 class="card-title">
+                        <i class="fas fa-gifts"></i>
+                        Merry Christmas
+                        <i class="fas fa-candy-cane"></i>
+                    </h1>
+                    <div class="card-tree">🎄</div>
+                    <p class="card-subtitle">Dành tặng em yêu của anh</p>
+                    <button class="open-card-btn" id="openCardBtn">
+                        <i class="fas fa-envelope-open"></i> Mở thiệp
+                    </button>
+                </div>
+
+                <!-- Card Inside (Wishes Carousel) -->
+                <div class="christmas-card-inside" id="cardInside">
+                    <div class="card-inside-header">
+                        <div class="header-left">
+                            <button id="backToCoverBtn" class="back-to-cover-btn">
+                                <i class="fas fa-arrow-left"></i> Đóng thiệp
+                            </button>
+                            <h2><i class="fas fa-heart"></i> Lời chúc dành cho em</h2>
+                        </div>
+                        <button id="addWishBtn" class="add-wish-btn" style="display: none;">
+                            <i class="fas fa-plus"></i> Thêm lời chúc
+                        </button>
+                    </div>
+
+                    <!-- Wishes Carousel -->
+                    <div class="wishes-carousel-container">
+                        <button class="carousel-nav prev" id="prevWish">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+
+                        <div class="wishes-carousel" id="wishesCarousel">
+                            <div class="carousel-track" id="carouselTrack">
+                                <!-- Wishes will be loaded here -->
+                                <div class="wish-slide loading">
+                                    <p style="text-align: center; color: rgba(255,255,255,0.6);">Đang tải...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="carousel-nav next" id="nextWish">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Carousel Indicators -->
+                    <div class="carousel-indicators" id="carouselIndicators">
+                        <!-- Dots will be added here -->
+                    </div>
+
+                    <!-- Navigation Hint -->
+                    <div class="navigation-hint">
+                        <i class="fas fa-keyboard"></i> Sử dụng phím ← → để chuyển trang
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Wish Modal -->
+    <div id="wishModal" class="wish-modal">
+        <div class="wish-modal-content">
+            <div class="wish-modal-header">
+                <h3 id="wishModalTitle">Thêm lời chúc</h3>
+                <button id="closeWishModal" class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="wish-modal-body">
+                <div class="form-group">
+                    <label for="wishTitle">Tiêu đề</label>
+                    <input type="text" id="wishTitle" placeholder="VD: Giáng sinh ấm áp">
+                </div>
+                <div class="form-group">
+                    <label for="wishContent">Nội dung</label>
+                    <textarea id="wishContent" rows="6" placeholder="Viết lời chúc ngọt ngào..."></textarea>
+                    <div class="char-count">
+                        <span id="wishCharCount">0</span>/500
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="wishIcon">Icon (emoji hoặc Font Awesome)</label>
+                    <input type="text" id="wishIcon" placeholder="VD: 🎅 hoặc fa-snowflake" value="🎄">
+                </div>
+            </div>
+            <div class="wish-modal-footer">
+                <button id="cancelWishBtn" class="btn-secondary">Hủy</button>
+                <button id="saveWishBtn" class="btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Toggle -->
+    <button id="musicToggle" class="music-toggle playing">
+        <i class="fas fa-music"></i>
+    </button>
+    <audio id="christmasMusic" loop>
+        <!-- You need to add your own Last Christmas MP3 file here -->
+        <source src="audio/last-christmas.mp3" type="audio/mpeg">
+    </audio>
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+    <script type="module" src="js/merry-christmas.js"></script>
+</body>
+</html>
+

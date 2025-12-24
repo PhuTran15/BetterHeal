@@ -47,6 +47,18 @@ header {
     color: var(--primary-color);
 }
 
+.attendance-icon a {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.attendance-icon a:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
 .user-info {
     display: flex;
     align-items: center;
@@ -162,6 +174,45 @@ footer {
     color: #666;
 }
 
+/* Nút điểm danh cố định */
+.fixed-attendance-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 100;
+}
+
+.fixed-attendance-btn a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: white;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.fixed-attendance-btn a:hover {
+    background-color: #4a7961;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.fixed-attendance-btn i {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.fixed-attendance-btn span {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
 @media (max-width: 768px) {
     .features-grid {
         grid-template-columns: 1fr;
@@ -212,6 +263,25 @@ footer {
         padding: 1.5rem;
         margin-top: 3rem;
     }
+
+    /* Responsive cho nút điểm danh cố định */
+    .fixed-attendance-btn {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .fixed-attendance-btn a {
+        width: 70px;
+        height: 70px;
+    }
+
+    .fixed-attendance-btn i {
+        font-size: 1.8rem;
+    }
+
+    .fixed-attendance-btn span {
+        font-size: 0.8rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -250,5 +320,25 @@ footer {
 
     main {
         margin: 1.5rem auto;
+    }
+
+    /* Responsive cho nút điểm danh cố định trên màn hình nhỏ */
+    .fixed-attendance-btn {
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .fixed-attendance-btn a {
+        width: 60px;
+        height: 60px;
+    }
+
+    .fixed-attendance-btn i {
+        font-size: 1.5rem;
+        margin-bottom: 3px;
+    }
+
+    .fixed-attendance-btn span {
+        font-size: 0.7rem;
     }
 }

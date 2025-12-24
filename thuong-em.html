@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thương em cỡ này - BetterHeal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/thuong-em.css">
+    <link rel="stylesheet" href="css/fixed-attendance.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <meta name="theme-color" content="#5b8a72">
+    <style>
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+            }
+            70% {
+                transform: scale(1.1);
+                box-shadow: 0 0 0 5px rgba(220, 53, 69, 0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="foryou.html" class="logo">
+            <i class="fas fa-arrow-left"></i> Quay lại
+        </a>
+        <div class="user-info" id="userInfo">
+            <span class="username">Xin chào, <span id="usernameDisplay">Người dùng</span></span>
+            <button id="logoutBtn" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="animated-title">Thương em cỡ này</h1>
+                <div class="heart-animation">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <p class="subtitle">Một nơi đặc biệt để lưu giữ những khoảnh khắc và tình cảm dành cho em</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="message-container">
+                <div class="message-card">
+                    <div class="message-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h2>Dành cho em</h2>
+                    <p>Nơi này được tạo ra với tất cả tình cảm và sự chân thành nhất...</p>
+                    <p>Mỗi khoảnh khắc, mỗi suy nghĩ, mỗi cảm xúc đều được lưu giữ ở đây.</p>
+                </div>
+
+                <div class="timeline-container">
+                    <div class="timeline-header">
+                        <h3><i class="fas fa-clock"></i> Những khoảnh khắc đặc biệt</h3>
+                        <button id="addMilestoneBtn" class="add-milestone-btn">
+                            <i class="fas fa-plus"></i> Thêm khoảnh khắc
+                        </button>
+                    </div>
+                    <div class="timeline" id="timeline">
+                        <!-- Timeline items sẽ được thêm vào đây -->
+                        <div class="timeline-placeholder" id="timelinePlaceholder">
+                            <i class="fas fa-heart-broken"></i>
+                            <p>Chưa có khoảnh khắc nào được lưu lại...</p>
+                            <p class="timeline-placeholder-hint">Hãy thêm những khoảnh khắc đặc biệt của hai người! 💕</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal thêm/sửa khoảnh khắc -->
+                <div class="milestone-modal" id="milestoneModal">
+                    <div class="milestone-modal-content">
+                        <div class="milestone-modal-header">
+                            <h3><i class="fas fa-star"></i> <span id="milestoneModalTitle">Thêm khoảnh khắc đặc biệt</span></h3>
+                            <button class="milestone-modal-close" id="milestoneModalClose">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="milestone-modal-body">
+                            <div class="milestone-form-group">
+                                <label><i class="fas fa-layer-group"></i> Giai đoạn</label>
+                                <select id="milestonePhase" class="milestone-input">
+                                    <option value="">-- Chọn hoặc tạo giai đoạn mới --</option>
+                                </select>
+                                <input type="text" id="milestoneNewPhase" class="milestone-input" placeholder="Hoặc nhập tên giai đoạn mới (VD: Giai đoạn làm quen)">
+                            </div>
+                            <div class="milestone-form-group">
+                                <label><i class="fas fa-calendar-alt"></i> Ngày tháng</label>
+                                <input type="date" id="milestoneDate" class="milestone-input" required>
+                            </div>
+                            <div class="milestone-form-group">
+                                <label><i class="fas fa-heading"></i> Tiêu đề</label>
+                                <input type="text" id="milestoneTitle" class="milestone-input" placeholder="VD: Lần đầu gặp nhau" maxlength="100" required>
+                            </div>
+                            <div class="milestone-form-group">
+                                <label><i class="fas fa-align-left"></i> Mô tả</label>
+                                <textarea id="milestoneDescription" class="milestone-textarea" placeholder="Viết về khoảnh khắc này..." maxlength="500"></textarea>
+                                <div class="milestone-char-count">
+                                    <span id="milestoneDescCharCount">0</span>/500
+                                </div>
+                            </div>
+                            <div class="milestone-form-group">
+                                <label><i class="fas fa-image"></i> Hình ảnh (tùy chọn)</label>
+                                <div class="milestone-image-upload">
+                                    <button type="button" id="milestoneImageBtn" class="milestone-image-btn">
+                                        <i class="fas fa-camera"></i> Chọn hình ảnh
+                                    </button>
+                                    <input type="file" id="milestoneImageInput" accept="image/*" style="display: none;">
+                                    <div id="milestoneImagePreview" class="milestone-image-preview"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="milestone-modal-footer">
+                            <button class="milestone-btn milestone-btn-cancel" id="milestoneCancelBtn">
+                                <i class="fas fa-times"></i> Hủy
+                            </button>
+                            <button class="milestone-btn milestone-btn-save" id="milestoneSaveBtn">
+                                <i class="fas fa-save"></i> Lưu
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-container">
+                    <h3><i class="fas fa-images"></i> Kỷ niệm</h3>
+                    <div class="gallery-controls">
+                        <button id="addImageBtn" class="add-image-btn">
+                            <i class="fas fa-plus"></i> Thêm hình ảnh
+                        </button>
+                        <input type="file" id="imageInput" accept="image/*" multiple style="display: none;">
+                    </div>
+                    <div class="gallery-grid" id="galleryGrid">
+                        <!-- Gallery items sẽ được thêm vào đây -->
+                        <div class="gallery-placeholder" id="galleryPlaceholder">
+                            <i class="fas fa-image"></i>
+                            <p>Những kỷ niệm đẹp sẽ được thêm vào đây</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal thêm ghi chú cho ảnh -->
+                <div class="caption-modal" id="captionModal">
+                    <div class="caption-modal-content">
+                        <h3><i class="fas fa-pen"></i> Thêm ghi chú cho ảnh</h3>
+                        <div class="caption-preview" id="captionPreview"></div>
+                        <textarea id="captionInput" placeholder="Nhập ghi chú cho bức ảnh này... (Ví dụ: Ngày đầu tiên gặp nhau 💕)" maxlength="200"></textarea>
+                        <div class="caption-char-count">
+                            <span id="captionCharCount">0</span>/200
+                        </div>
+                        <div class="caption-modal-buttons">
+                            <button class="caption-btn caption-skip" id="captionSkipBtn">
+                                <i class="fas fa-forward"></i> Bỏ qua
+                            </button>
+                            <button class="caption-btn caption-save" id="captionSaveBtn">
+                                <i class="fas fa-check"></i> Lưu
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="love-meter">
+                    <h3><i class="fas fa-heart-pulse"></i> Mức độ yêu thương</h3>
+                    <div class="meter-container">
+                        <div class="meter-bar">
+                            <div class="meter-fill" style="width: 100%;">
+                                <div class="meter-particles"></div>
+                                <div class="meter-shine"></div>
+                                <span class="meter-text">∞ Vô tận</span>
+                                <div class="meter-hearts">
+                                    <i class="fas fa-heart"></i>
+                                    <i class="fas fa-heart"></i>
+                                    <i class="fas fa-heart"></i>
+                                    <i class="fas fa-heart"></i>
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Made with <i class="fas fa-heart" style="color: #e74c3c;"></i> for someone special</p>
+    </footer>
+
+    <div class="fixed-attendance-btn" id="fixedAttendanceBtn">
+        <a href="attendance.html" title="Điểm danh hàng ngày">
+            <div style="position: relative;">
+                <i class="fas fa-calendar-check"></i>
+                <div id="attendanceBadge" style="position: absolute; top: -10px; right: -10px; background-color: #e74c3c; color: white; width: 18px; height: 18px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 12px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2); animation: pulse 1.5s infinite;">!</div>
+            </div>
+            <span>Điểm danh</span>
+        </a>
+    </div>
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js"></script>
+    <script type="module" src="js/thuong-em.js"></script>
+
+    <!-- Floating hearts animation -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Image viewer modal will be created dynamically -->
+
+    <style>
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+    </style>
+</body>
+</html>
+

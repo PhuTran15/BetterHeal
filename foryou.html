@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetterHeal - For You</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/foryou.css">
+    <link rel="stylesheet" href="css/fixed-attendance.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <meta name="theme-color" content="#5b8a72">
+    <style>
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+            }
+            70% {
+                transform: scale(1.1);
+                box-shadow: 0 0 0 5px rgba(220, 53, 69, 0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="dashboard.html" class="logo">
+            <i class="fas fa-heart"></i> BetterHeal
+        </a>
+        <div class="user-info" id="userInfo">
+            <span class="username">Xin chào, <span id="usernameDisplay">Người dùng</span></span>
+            <a href="admin-permissions.html" id="adminLink" class="admin-link" style="display: none;">
+                <i class="fas fa-user-shield"></i> Quản lý
+            </a>
+            <button id="logoutBtn" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="welcome-section">
+            <h1>For You</h1>
+            <p>Những điều đặc biệt dành riêng cho bạn</p>
+        </section>
+
+        <section class="features-grid">
+            <div class="feature-card special-card" onclick="window.location.href='thuong-em.html'">
+                <div class="card-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h2>Thương em cỡ này</h2>
+                <p>Một nơi đặc biệt để lưu giữ những khoảnh khắc và tình cảm dành cho em</p>
+                <a href="thuong-em.html" aria-label="Truy cập Thương em cỡ này">Xem ngay</a>
+            </div>
+
+            <div class="feature-card special-card-2" onclick="window.location.href='trai-tim-to.html'">
+                <div class="card-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h2>Trái tim to bự</h2>
+                <p>Xem trái tim được tạo nên từ hàng ngàn hạt chuyển động đầy màu sắc</p>
+                <a href="trai-tim-to.html" aria-label="Truy cập Trái tim to bự">Xem ngay</a>
+            </div>
+
+            <div class="feature-card christmas-card" onclick="window.location.href='merry-christmas.html'">
+                <div class="card-icon">
+                    <i class="fas fa-gifts"></i>
+                </div>
+                <h2>Merry Christmas</h2>
+                <p>Thiệp Noel và những lời chúc ngọt ngào dành riêng cho em ❤️🎄</p>
+                <a href="merry-christmas.html" aria-label="Truy cập Merry Christmas">Xem ngay</a>
+            </div>
+
+            <!-- Các mục khác sẽ được thêm vào sau -->
+            <div class="feature-card coming-soon">
+                <div class="card-icon">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+                <h2>Sắp có thêm</h2>
+                <p>Nhiều tính năng đặc biệt khác đang được chuẩn bị...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 BetterHeal. Tất cả quyền được bảo lưu.</p>
+    </footer>
+
+    <div class="fixed-attendance-btn" id="fixedAttendanceBtn">
+        <a href="attendance.html" title="Điểm danh hàng ngày">
+            <div style="position: relative;">
+                <i class="fas fa-calendar-check"></i>
+                <div id="attendanceBadge" style="position: absolute; top: -10px; right: -10px; background-color: #e74c3c; color: white; width: 18px; height: 18px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 12px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2); animation: pulse 1.5s infinite;">!</div>
+            </div>
+            <span>Điểm danh</span>
+        </a>
+    </div>
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+    <script type="module" src="js/foryou.js"></script>
+</body>
+</html>
+
