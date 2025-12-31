@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cộng đồng - BetterHeal</title>
+    <title>Tâm sự - BetterHeal</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/navigation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -140,9 +140,11 @@
         }
 
         .coming-soon i {
-            font-size: 4rem;
-            color: var(--accent-color);
-            margin-bottom: 2rem;
+            font-size: 5rem;
+            color: var(--primary-color);
+            margin-bottom: 2.5rem;
+            display: block;
+            opacity: 0.8;
         }
     </style>
 </head>
@@ -166,6 +168,9 @@
                 <div id="authButtons" class="auth-container">
                     <a href="login.html" class="btn">Đăng nhập</a>
                     <a href="register.html" class="btn btn-secondary">Đăng ký</a>
+                    <a href="login.html" class="auth-pill" title="Đăng nhập" style="display: none;">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </a>
                 </div>
                 <div id="userInfo" class="user-profile" style="display: none;">
                     <div class="user-avatar" id="userAvatar">U</div>
@@ -184,13 +189,13 @@
     <main>
         <section class="community-section">
             <div class="container">
-                <h1 class="section-title">Cộng đồng</h1>
-                <p class="section-description">Kết nối với những người có cùng trải nghiệm, chia sẻ và học hỏi từ nhau.</p>
+                <h1 class="section-title">Tâm sự</h1>
+                <p class="section-description">Nơi chia sẻ gánh nặng tâm hồn, lắng nghe và được thấu hiểu.</p>
 
                 <div class="coming-soon">
-                    <i class="fas fa-users"></i>
+                    <i class="fas fa-comments"></i>
                     <h2>Tính năng đang được phát triển</h2>
-                    <p>Chúng tôi đang nỗ lực phát triển tính năng Tâm sự để mang đến trải nghiệm tốt nhất cho bạn. Vui lòng quay lại sau!</p>
+                    <p>Chúng tôi đang nỗ lực phát triển tính năng Tâm sự để mang đến một không gian chia sẻ an toàn cho bạn. Vui lòng quay lại sau!</p>
                     <a href="dashboard.html" class="btn">Quay lại trang chủ</a>
                 </div>
             </div>

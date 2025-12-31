@@ -149,6 +149,24 @@ header.premium-header {
     box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
 }
 
+.auth-pill {
+    background-color: #5b8a72;
+    color: white !important;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+}
+
+.auth-pill:hover {
+    transform: scale(1.1);
+    background-color: #4a6d5a;
+}
+
 /* Animations */
 @keyframes fadeInDown {
     from {
@@ -265,6 +283,22 @@ header.premium-header {
     .nav-actions {
         grid-column: 3;
         justify-self: end;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .auth-container {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    /* Hide the text/large buttons on mobile and show only the pill if we use it */
+    .auth-container .btn {
+        display: none; /* Hide standard buttons in the small grid */
+    }
+
+    .auth-container .auth-pill {
+        display: flex !important;
     }
 
     .nav-menu {

@@ -125,6 +125,9 @@
 <body>
     <header class="premium-header">
         <nav class="navbar-container">
+            <button class="mobile-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
             <a href="dashboard.html" class="logo-brand">
                 <i class="fas fa-heart"></i> BetterHeal
             </a>
@@ -135,18 +138,24 @@
                 <li class="nav-item"><a href="foryou.html" class="nav-link-custom"><i class="fas fa-hand-holding-heart"></i> <span>For You</span></a></li>
                 <li class="nav-item"><a href="community.html" class="nav-link-custom"><i class="fas fa-comments"></i> <span>Tâm sự</span></a></li>
             </ul>
-            <div id="authButtons" class="auth-container">
-                <a href="login.html" class="btn">Đăng nhập</a>
-                <a href="register.html" class="btn btn-secondary">Đăng ký</a>
-            </div>
-            <div id="userInfo" class="user-profile" style="display: none;">
-                <span class="user-name">User</span>
-                <a href="menu-password-manager.html" id="menuPasswordLink" class="admin-pill" style="display: none;">
-                    <i class="fas fa-shield-halved"></i> <span>Quản lý</span>
-                </a>
-                <button id="logoutBtn" class="logout-pill" title="Đăng xuất">
-                    <i class="fas fa-arrow-right-from-bracket"></i>
-                </button>
+            <div class="nav-actions">
+                <div id="authButtons" class="auth-container">
+                    <a href="login.html" class="btn">Đăng nhập</a>
+                    <a href="register.html" class="btn btn-secondary">Đăng ký</a>
+                    <a href="login.html" class="auth-pill" title="Đăng nhập" style="display: none;">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </a>
+                </div>
+                <div id="userInfo" class="user-profile" style="display: none;">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <span class="user-name" id="userName">User</span>
+                    <a href="menu-password-manager.html" id="menuPasswordLink" class="admin-pill" style="display: none;">
+                        <i class="fas fa-shield-halved"></i> <span>Quản lý</span>
+                    </a>
+                    <button id="logoutBtn" class="logout-pill" title="Đăng xuất">
+                        <i class="fas fa-arrow-right-from-bracket"></i>
+                    </button>
+                </div>
             </div>
         </nav>
     </header>

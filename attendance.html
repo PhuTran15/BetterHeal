@@ -33,6 +33,9 @@
 <body>
     <header class="premium-header">
         <nav class="navbar-container">
+            <button class="mobile-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
             <a href="dashboard.html" class="logo-brand">
                 <i class="fas fa-heart"></i> BetterHeal
             </a>
@@ -44,8 +47,16 @@
                 <li class="nav-item"><a href="community.html" class="nav-link-custom"><i class="fas fa-comments"></i> <span>Tâm sự</span></a></li>
             </ul>
             <div class="nav-actions">
+                <div id="authButtons" class="auth-container" style="display: none;">
+                    <a href="login.html" class="btn">Đăng nhập</a>
+                    <a href="register.html" class="btn btn-secondary">Đăng ký</a>
+                    <a href="login.html" class="auth-pill" title="Đăng nhập" style="display: none;">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </a>
+                </div>
                 <div id="userInfo" class="user-profile" style="display: none;">
-                    <span class="user-name">Xin chào, <span id="usernameDisplay">Người dùng</span></span>
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <span class="user-name" id="userName">User</span>
                     <a href="menu-password-manager.html" id="menuPasswordLink" class="admin-pill" style="display: none;">
                         <i class="fas fa-shield-halved"></i> <span>Quản lý</span>
                     </a>
