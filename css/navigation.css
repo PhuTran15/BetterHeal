@@ -13,7 +13,7 @@ header.premium-header {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 2000;
+    z-index: 3000; /* Increased to stay above overlay */
     height: var(--nav-height);
     display: flex;
     align-items: center;
@@ -24,10 +24,12 @@ header.premium-header {
     width: 100%;
     max-width: 1300px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
+    position: relative;
+    height: 100%;
 }
 
 .logo-brand {
@@ -194,6 +196,28 @@ header.premium-header {
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
 }
 
+/* Responsive Mobile Menu */
+.mobile-toggle {
+    display: none;
+    background: #5b8a72; /* Solid background for visibility */
+    color: white !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    z-index: 3100;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(91, 138, 114, 0.2);
+}
+
+.mobile-toggle:active {
+    transform: scale(0.9);
+}
+
 @media (max-width: 1024px) {
     .nav-link-custom span {
         display: none;
@@ -208,7 +232,143 @@ header.premium-header {
 }
 
 @media (max-width: 768px) {
+    .premium-header {
+        height: 65px;
+        background: #ffffff !important;
+    }
+
+    .navbar-container {
+        padding: 0 0.8rem;
+        display: grid !important;
+        grid-template-columns: 45px 1fr 45px; /* Fixed 3-column layout */
+        align-items: center;
+        gap: 0;
+    }
+
+    .mobile-toggle {
+        display: flex !important;
+        grid-column: 1;
+        margin-right: auto;
+    }
+
+    .logo-brand {
+        grid-column: 2;
+        justify-self: center;
+        font-size: 1.1rem;
+        margin: 0 !important;
+    }
+
+    .logo-brand i {
+        font-size: 1.3rem;
+    }
+
+    .nav-actions {
+        grid-column: 3;
+        justify-self: end;
+    }
+
     .nav-menu {
-        display: none !important; /* Will need a mobile toggle later */
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 280px;
+        height: 100vh;
+        background-color: #ffffff !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 85px 1.2rem 2rem !important;
+        gap: 0.4rem !important;
+        box-shadow: 15px 0 40px rgba(0, 0, 0, 0.2);
+        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 2050;
+        opacity: 1 !important;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        width: 100%;
+        opacity: 1 !important;
+    }
+
+    .nav-link-custom {
+        width: 100%;
+        padding: 1.1rem 1.3rem;
+        font-size: 1.05rem;
+        border-radius: 12px;
+        color: #2c3e50 !important;
+        opacity: 1 !important;
+        display: flex !important;
+        visibility: visible !important;
+        background: transparent !important;
+    }
+
+    .nav-link-custom span {
+        display: inline !important;
+        opacity: 1 !important;
+    }
+
+    .nav-link-custom.active {
+        background-color: #5b8a72 !important;
+        color: #ffffff !important;
+    }
+
+    .nav-link-custom.active span {
+        color: #ffffff !important;
+    }
+
+    .nav-link-custom.active i {
+        color: #ffffff !important;
+    }
+
+    /* Overlay */
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 2500;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .nav-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+
+    .user-profile {
+        background: transparent;
+        border: none;
+        padding: 0;
+    }
+
+    .user-avatar {
+        display: none; /* Hide avatar on mobile to save space */
+    }
+
+    .user-name {
+        display: none; 
+    }
+
+    .logout-pill {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-brand span {
+        display: none; /* Only show icon on very small screens if necessary */
     }
 }
