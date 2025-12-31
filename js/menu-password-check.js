@@ -1,19 +1,23 @@
-// import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-// import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js';
+import { initializeApp, getApps, getApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
+import { getAuth } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
+import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js';
 
-// Firebase config
-// const firebaseConfig = {
-//     apiKey: "AIzaSyDSzFT32QJNv_0H_jLw6CASZdD0gJTE-Uw",
-//     authDomain: "betterheal-d59e9.firebaseapp.com",
-//     databaseURL: "https://betterheal-d59e9-default-rtdb.asia-southeast1.firebasedatabase.app",
-//     projectId: "betterheal-d59e9",
-//     storageBucket: "betterheal-d59e9.firebasestorage.app",
-//     messagingSenderId: "1069393133390",
-//     appId: "1:1069393133390:web:e0e8e8e8e8e8e8e8e8e8e8"
-// };
+// Firebase config - Updated to correct project
+const firebaseConfig = {
+    apiKey: "AIzaSyCEK54N506sR3dkYdhXtrP1mQPjz1QfVLg",
+    authDomain: "betterheal-117ed.firebaseapp.com",
+    databaseURL: "https://betterheal-117ed-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "betterheal-117ed",
+    storageBucket: "betterheal-117ed.firebasestorage.app",
+    messagingSenderId: "482091866987",
+    appId: "1:482091866987:web:51e473cd51db4f632b0a2e",
+    measurementId: "G-HSBSJ63EXT"
+};
 
-// const app = initializeApp(firebaseConfig);
-// const db = getDatabase(app);
+// Initialize Firebase (check if already initialized)
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+const auth = getAuth(app);
+const db = getDatabase(app);
 
 // Get menu ID from current page
 function getCurrentMenuId() {
@@ -22,12 +26,16 @@ function getCurrentMenuId() {
     
     const menuMap = {
         'feelings.html': 'feelings',
-        'diary.html': 'diary',
+        'journal.html': 'diary',
         'meditation.html': 'meditation',
-        'chat.html': 'chat',
+        'community.html': 'chat',
+        'attendance.html': 'attendance',
+        'foryou.html': 'foryou',
+        'trai-tim-to.html': 'trai-tim-to',
+        'thuong-em.html': 'thuong-em',
         'merry-christmas.html': 'christmas',
         'christmas-wishes-admin.html': 'christmas-wishes',
-        'thuong-em.html': 'thuong-em'
+        'admin-permissions.html': 'admin-permissions'
     };
     
     return menuMap[filename] || null;
@@ -42,29 +50,30 @@ async function checkPasswordRequired() {
     // Check if user is admin
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && (currentUser.username === 'admin' || currentUser.username === 'thaonguyen')) {
+        console.log("Admin bypass enabled");
         return; // Admin bypass
     }
 
-    // Check if password is enabled for this menu
-    // const passwordRef = ref(db, `menuPasswords/${menuId}`);
-    // const snapshot = await get(passwordRef);
-    // const passwordData = snapshot.val();
-    const passwordData = { enabled: true, password: "281015" };
-    if (passwordData && passwordData.enabled) {
-        // Check if user has already entered password in this session
-        const sessionKey = `menu_password_${menuId}`;
-        const sessionPassword = sessionStorage.getItem(sessionKey);
-        // if (sessionPassword === passwordData.password) {
-        //     return; // Password already verified
-        // }
+    try {
+        // Check if password is enabled for this menu in Firebase
+        const passwordRef = ref(db, `menuPasswords/${menuId}`);
+        const snapshot = await get(passwordRef);
+        const passwordData = snapshot.val();
 
-        // Show password prompt
-        showPasswordPrompt(menuId, passwordData.password);
+        if (passwordData && passwordData.enabled) {
+            // Always show password prompt as requested by user
+            showPasswordPrompt(menuId, passwordData.password);
+        }
+    } catch (error) {
+        console.error("Error checking password requirement:", error);
     }
 }
 
 // Show password prompt
 function showPasswordPrompt(menuId, correctPassword) {
+    // Hide body content to prevent peaking
+    document.body.style.overflow = 'hidden';
+
     // Create modal HTML
     const modalHTML = `
         <div id="menuPasswordModal" class="menu-password-modal">
@@ -90,7 +99,7 @@ function showPasswordPrompt(menuId, correctPassword) {
                 </div>
                 <div class="menu-password-footer">
                     <button id="cancelPasswordBtn" class="btn-cancel">
-                        <i class="fas fa-times"></i> Hủy
+                        <i class="fas fa-times"></i> Quay lại
                     </button>
                     <button id="submitPasswordBtn" class="btn-submit">
                         <i class="fas fa-check"></i> Xác nhận
@@ -103,8 +112,10 @@ function showPasswordPrompt(menuId, correctPassword) {
     // Add modal to page
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 
-    // Add styles
-    addPasswordModalStyles();
+    // Add styles if not already added
+    if (!document.getElementById('menuPasswordStyles')) {
+        addPasswordModalStyles();
+    }
 
     // Event listeners
     const modal = document.getElementById('menuPasswordModal');
@@ -138,11 +149,9 @@ function showPasswordPrompt(menuId, correctPassword) {
             input.classList.add('error');
             return;
         }
-
         if (enteredPassword === correctPassword) {
-            // Save to session
-            sessionStorage.setItem(`menu_password_${menuId}`, enteredPassword);
-            // Remove modal
+            // Restore overflow and remove modal
+            document.body.style.overflow = '';
             modal.remove();
         } else {
             errorDiv.textContent = 'Mật khẩu không đúng!';
@@ -172,6 +181,7 @@ function showPasswordPrompt(menuId, correctPassword) {
 // Add modal styles
 function addPasswordModalStyles() {
     const style = document.createElement('style');
+    style.id = 'menuPasswordStyles';
     style.textContent = `
         .menu-password-modal {
             position: fixed;
@@ -179,12 +189,12 @@ function addPasswordModalStyles() {
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(100px);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 99999;
+            z-index: 100000;
             animation: fadeIn 0.3s ease-out;
         }
 
@@ -197,15 +207,16 @@ function addPasswordModalStyles() {
             background: white;
             border-radius: 20px;
             width: 90%;
-            max-width: 450px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
             animation: slideUp 0.3s ease-out;
+            overflow: hidden;
         }
 
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -214,50 +225,52 @@ function addPasswordModalStyles() {
         }
 
         .menu-password-header {
-            padding: 2rem;
+            padding: 2rem 1.5rem;
             text-align: center;
+            background: #f8f9fa;
             border-bottom: 2px solid #f0f0f0;
         }
 
         .menu-password-header i {
-            font-size: 3rem;
-            color: #667eea;
+            font-size: 2.5rem;
+            color: #5b8a72;
             margin-bottom: 1rem;
         }
 
         .menu-password-header h2 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #333;
-            margin-bottom: 0.5rem;
+            margin: 0 0 0.5rem 0;
         }
 
         .menu-password-header p {
             color: #666;
-            font-size: 1rem;
+            font-size: 0.9rem;
+            margin: 0;
         }
 
         .menu-password-body {
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .password-input-group {
             position: relative;
-            margin-bottom: 1rem;
         }
 
         .password-input-group input {
             width: 100%;
-            padding: 1rem 3rem 1rem 1rem;
+            padding: 0.9rem 3rem 0.9rem 1rem;
             border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1.1rem;
             transition: all 0.3s ease;
+            box-sizing: border-box;
         }
 
         .password-input-group input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #5b8a72;
+            box-shadow: 0 0 0 4px rgba(91, 138, 114, 0.1);
         }
 
         .password-input-group input.error {
@@ -267,13 +280,13 @@ function addPasswordModalStyles() {
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
         .password-input-group button {
             position: absolute;
-            right: 10px;
+            right: 8px;
             top: 50%;
             transform: translateY(-50%);
             background: none;
@@ -285,28 +298,28 @@ function addPasswordModalStyles() {
         }
 
         .password-input-group button:hover {
-            color: #667eea;
+            color: #5b8a72;
         }
 
         .password-error {
             color: #dc3545;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             min-height: 20px;
             margin-top: 0.5rem;
+            text-align: center;
         }
 
         .menu-password-footer {
-            padding: 1.5rem 2rem;
-            border-top: 2px solid #f0f0f0;
+            padding: 1rem 1.5rem 1.5rem;
             display: flex;
             gap: 1rem;
         }
 
         .menu-password-footer button {
             flex: 1;
-            padding: 0.75rem 1.5rem;
+            padding: 0.8rem;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -327,31 +340,14 @@ function addPasswordModalStyles() {
         }
 
         .btn-submit {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #5b8a72;
             color: white;
         }
 
         .btn-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        @media (max-width: 768px) {
-            .menu-password-content {
-                width: 95%;
-            }
-
-            .menu-password-header {
-                padding: 1.5rem;
-            }
-
-            .menu-password-body {
-                padding: 1.5rem;
-            }
-
-            .menu-password-footer {
-                flex-direction: column;
-            }
+            background: #4a7260;
+            box-shadow: 0 5px 15px rgba(91, 138, 114, 0.3);
         }
     `;
     document.head.appendChild(style);
@@ -359,4 +355,3 @@ function addPasswordModalStyles() {
 
 // Initialize check
 checkPasswordRequired();
-

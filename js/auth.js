@@ -207,36 +207,31 @@ export function updateUIOnAuth() {
         if (authButtons) authButtons.style.display = 'none';
         if (userInfo) {
             userInfo.style.display = 'flex';
-            const usernameElement = userInfo.querySelector('.username');
-            if (usernameElement) {
-                // Xử lý tên người dùng để hiển thị thân thiện hơn
-                let displayName = 'Người dùng';
+            
+            // Handle multiple possible username displays
+            const usernameDisplay = document.getElementById('usernameDisplay');
+            const usernameElement = userInfo.querySelector('.username') || userInfo.querySelector('.user-name');
+            
+            let displayName = 'Người dùng';
+            if (currentUser.displayName) {
+                displayName = currentUser.displayName;
+            } else if (currentUser.username) {
+                displayName = currentUser.username;
+            }
 
-                if (currentUser.displayName) {
-                    displayName = currentUser.displayName;
-                } else if (currentUser.email && currentUser.email.includes('@')) {
-                    // Nếu là email, chỉ lấy phần tên trước @
-                    displayName = currentUser.email.split('@')[0];
-                } else if (currentUser.username) {
-                    displayName = currentUser.username;
-                }
-
+            if (usernameDisplay) {
+                usernameDisplay.textContent = displayName;
+            } else if (usernameElement) {
                 usernameElement.textContent = displayName;
             }
 
-            // Show menu password manager link for admin
+            // Handle admin link
             if (menuPasswordLink) {
-                console.log('Current user:', currentUser);
-                console.log('Username:', currentUser.username);
                 if (currentUser.username === 'admin' || currentUser.username === 'thaonguyen') {
-                    console.log('Showing menu password link');
-                    menuPasswordLink.style.display = 'inline-flex';
+                    menuPasswordLink.style.display = 'flex';
                 } else {
-                    console.log('Hiding menu password link');
                     menuPasswordLink.style.display = 'none';
                 }
-            } else {
-                console.log('menuPasswordLink element not found');
             }
         }
     } else {

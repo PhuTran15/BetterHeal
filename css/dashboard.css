@@ -25,26 +25,84 @@ body {
 }
 
 header {
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 1rem 2rem;
-    display: flex;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav.navbar {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex !important;
     justify-content: space-between;
     align-items: center;
+    padding: 0.8rem 2rem;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 1.5rem;
-    font-weight: bold;
+    gap: 0.6rem;
+    font-size: 1.6rem;
+    font-weight: 700;
     color: var(--primary-color);
     text-decoration: none;
+    letter-spacing: -0.5px;
 }
 
 .logo i {
+    font-size: 1.8rem;
     color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex !important;
+    align-items: center;
+    gap: 2rem;
+    list-style: none !important;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    list-style: none !important;
+    display: block;
+}
+
+.nav-link {
+    color: var(--text-color);
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 1rem;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: var(--transition);
+    opacity: 0.85;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-color);
+    opacity: 1;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: var(--transition);
+    border-radius: 2px;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
 }
 
 .attendance-icon a {
@@ -66,23 +124,29 @@ header {
 }
 
 .username {
-    font-weight: 500;
+    font-weight: 600;
+    color: var(--text-color);
 }
 
 .logout-btn {
     background-color: transparent;
-    border: none;
     color: var(--text-color);
-    cursor: pointer;
+    border: 1px solid #eee;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
     font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
     display: flex;
     align-items: center;
-    gap: 0.3rem;
-    transition: var(--transition);
+    gap: 0.4rem;
 }
 
 .logout-btn:hover {
+    background-color: #fcebeb;
     color: var(--error-color);
+    border-color: #fcebeb;
 }
 
 main {

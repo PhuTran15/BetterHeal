@@ -4,150 +4,186 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nhật ký - BetterHeal</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/journal.css">
+    <link rel="stylesheet" href="css/navigation.css">
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
     <meta name="theme-color" content="#5b8a72">
-    <style>
-        /* Styles for journal page */
-        .journal-section {
-            padding: 2rem 0;
-        }
-
-        .journal-form {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .journal-entry {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .journal-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 0.5rem;
-        }
-
-        .journal-date {
-            font-weight: 500;
-            color: var(--primary-color);
-        }
-
-        .journal-mood {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .journal-mood i {
-            color: var(--accent-color);
-        }
-
-        .journal-content {
-            white-space: pre-wrap;
-            line-height: 1.6;
-        }
-
-        .mood-selector {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .mood-option {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .mood-option:hover {
-            background-color: rgba(91, 138, 114, 0.1);
-        }
-
-        .mood-option.selected {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .mood-option i {
-            font-size: 1.2rem;
-        }
-
-        .coming-soon {
-            text-align: center;
-            padding: 4rem 2rem;
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-        }
-
-        .coming-soon h2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .coming-soon p {
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-        }
-
-        .coming-soon i {
-            font-size: 4rem;
-            color: var(--accent-color);
-            margin-bottom: 2rem;
-        }
-    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <a href="dashboard.html" class="logo">
+    <header class="premium-header">
+        <nav class="navbar-container">
+            <a href="dashboard.html" class="logo-brand">
                 <i class="fas fa-heart"></i> BetterHeal
             </a>
-            <div id="authButtons" class="auth-container">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link-custom"><i class="fas fa-home"></i> <span>Trang chủ</span></a></li>
+                <li class="nav-item"><a href="feelings.html" class="nav-link-custom"><i class="fas fa-comment-heart"></i> <span>Nỗi lòng</span></a></li>
+                <li class="nav-item"><a href="journal.html" class="nav-link-custom active"><i class="fas fa-book-open"></i> <span>Nhật ký</span></a></li>
+                <li class="nav-item"><a href="foryou.html" class="nav-link-custom"><i class="fas fa-hand-holding-heart"></i> <span>For You</span></a></li>
+                <li class="nav-item"><a href="community.html" class="nav-link-custom"><i class="fas fa-comments"></i> <span>Tâm sự</span></a></li>
+            </ul>
+            <div id="authButtons" class="auth-container" style="display: none;">
                 <a href="login.html" class="btn">Đăng nhập</a>
                 <a href="register.html" class="btn btn-secondary">Đăng ký</a>
             </div>
-            <div id="userInfo" class="user-info" style="display: none;">
-                <span class="username">User</span>
-                <button id="logoutBtn" class="logout-btn">Đăng xuất</button>
+            <div id="userInfo" class="user-profile" style="display: none;">
+                <span class="user-name">User</span>
+                <a href="menu-password-manager.html" id="menuPasswordLink" class="admin-pill" style="display: none;">
+                    <i class="fas fa-shield-halved"></i> <span>Quản lý</span>
+                </a>
+                <button id="logoutBtn" class="logout-pill" title="Đăng xuất">
+                    <i class="fas fa-arrow-right-from-bracket"></i>
+                </button>
             </div>
         </nav>
     </header>
 
     <main>
-        <section class="journal-section">
-            <div class="container">
-                <h1 class="section-title">Nhật ký</h1>
-                <p class="section-description">Ghi lại cảm xúc, suy nghĩ hàng ngày để theo dõi hành trình phát triển bản thân.</p>
+        <div class="journal-container">
+            <div class="journal-header-content">
+                <h1>Nhật ký của bạn</h1>
+                <p>Nơi lưu giữ những mảnh ghép cảm xúc và hành trình chữa lành.</p>
+            </div>
 
-                <div class="coming-soon">
-                    <i class="fas fa-tools"></i>
-                    <h2>Tính năng đang được phát triển</h2>
-                    <p>Chúng tôi đang nỗ lực phát triển tính năng Nhật ký để mang đến trải nghiệm tốt nhất cho bạn. Vui lòng quay lại sau!</p>
-                    <a href="dashboard.html" class="btn">Quay lại trang chủ</a>
+            <!-- Viết nhật ký mới -->
+            <section class="journal-card" id="journalWriteSection">
+                <div class="journal-form-group">
+                    <label for="journalTitle">Tiêu đề (Không bắt buộc)</label>
+                    <input type="text" id="journalTitle" class="journal-input" placeholder="Hôm nay của bạn thế nào?">
+                </div>
+
+                <div class="journal-form-group">
+                    <label class="mood-label">Tâm trạng hiện tại</label>
+                    <div class="mood-options" id="moodOptions">
+                        <button class="mood-btn" data-mood="happy">
+                            <i class="fas fa-smile"></i>
+                            <span>Vui vẻ</span>
+                        </button>
+                        <button class="mood-btn" data-mood="sad">
+                            <i class="fas fa-frown"></i>
+                            <span>Buồn bã</span>
+                        </button>
+                        <button class="mood-btn active" data-mood="calm">
+                            <i class="fas fa-leaf"></i>
+                            <span>Bình yên</span>
+                        </button>
+                        <button class="mood-btn" data-mood="angry">
+                            <i class="fas fa-angry"></i>
+                            <span>Bực bội</span>
+                        </button>
+                        <button class="mood-btn" data-mood="excited">
+                            <i class="fas fa-star"></i>
+                            <span>Hào hứng</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="journal-form-group">
+                    <label for="journalContent">Nội dung nhật ký</label>
+                    <textarea id="journalContent" class="journal-textarea" placeholder="Hãy viết ra những gì bạn đang nghĩ..."></textarea>
+                </div>
+
+                <button id="saveJournalBtn" class="btn" style="width: 100%; padding: 1rem; font-weight: 600;">
+                    <i class="fas fa-feather-alt"></i> Lưu vào nhật ký
+                </button>
+            </section>
+
+            <!-- Danh sách nhật ký -->
+            <section id="journalListSection">
+                <div class="entries-header">
+                    <h2 class="entries-title">Hành trình đã qua</h2>
+                    <div class="entries-filter">
+                        <button id="viewCalendarBtn" class="btn btn-secondary">
+                            <i class="fas fa-calendar-alt"></i> Xem lịch cảm xúc
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="entryList" class="entry-list">
+                    <!-- Các mục nhật ký sẽ được load vào đây -->
+                    <div class="empty-entries">
+                        <i class="fas fa-book-open"></i>
+                        <p>Đang tải nhật ký của bạn...</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Edit Journal Modal -->
+        <div id="editModal" class="modal-overlay" style="display: none;">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h2>Chỉnh sửa nhật ký</h2>
+                    <button class="close-modal-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editEntryId">
+                    <div class="journal-form-group">
+                        <label for="editJournalTitle">Tiêu đề</label>
+                        <input type="text" id="editJournalTitle" class="journal-input">
+                    </div>
+                    <div class="journal-form-group">
+                        <label class="mood-label">Tâm trạng</label>
+                        <div class="mood-options" id="editMoodOptions">
+                            <button class="mood-btn" data-mood="happy"><i class="fas fa-smile"></i></button>
+                            <button class="mood-btn" data-mood="sad"><i class="fas fa-frown"></i></button>
+                            <button class="mood-btn" data-mood="calm"><i class="fas fa-leaf"></i></button>
+                            <button class="mood-btn" data-mood="angry"><i class="fas fa-angry"></i></button>
+                            <button class="mood-btn" data-mood="excited"><i class="fas fa-star"></i></button>
+                        </div>
+                    </div>
+                    <div class="journal-form-group">
+                        <label for="editJournalContent">Nội dung</label>
+                        <textarea id="editJournalContent" class="journal-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="cancelEditBtn" class="btn btn-secondary">Hủy bỏ</button>
+                    <button id="updateJournalBtn" class="btn">Cập nhật</button>
                 </div>
             </div>
-        </section>
+        </div>
+
+        <!-- Calendar Modal -->
+        <div id="calendarModal" class="modal-overlay" style="display: none;">
+            <div class="modal-card calendar-modal-card">
+                <div class="modal-header">
+                    <h2>Lịch cảm xúc</h2>
+                    <button class="close-calendar-btn close-modal-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="calendar-controls">
+                        <button id="prevMonth" class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
+                        <h3 id="currentMonthYear">Tháng 12, 2023</h3>
+                        <button id="nextMonth" class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="calendar-grid-header">
+                        <div>T2</div><div>T3</div><div>T4</div><div>T5</div><div>T6</div><div>T7</div><div>CN</div>
+                    </div>
+                    <div id="calendarGrid" class="calendar-grid">
+                        <!-- Days will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Entry Preview Modal (When clicking a day in calendar) -->
+        <div id="entryPreviewModal" class="modal-overlay" style="display: none; z-index: 1100;">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h2 id="previewDate">Chi tiết nhật ký</h2>
+                    <button class="close-preview-btn close-modal-btn">&times;</button>
+                </div>
+                <div id="previewEntriesList" class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                    <!-- Entries for the selected day will appear here -->
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -156,59 +192,7 @@
         </div>
     </footer>
 
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
-    <script type="module" src="js/auth.js"></script>
-    <script type="module">
-        // Import Firebase modules
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-        import { checkAuth, getCurrentUser, updateUIOnAuth } from "./js/auth.js";
-
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyDQJgBZxUQkfG0iCRR1BUBWxKxDZpqc90Y",
-            authDomain: "betterheal-blog.firebaseapp.com",
-            projectId: "betterheal-blog",
-            storageBucket: "betterheal-blog.appspot.com",
-            messagingSenderId: "1058240258413",
-            appId: "1:1058240258413:web:d1c9a7a4c5fb5ef93b6b2e"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-
-        // Document ready
-        document.addEventListener('DOMContentLoaded', () => {
-            // Check if user is logged in
-            if (!checkAuth()) {
-                return;
-            }
-
-            // Update UI based on auth state
-            updateUIOnAuth();
-
-            // Setup logout functionality
-            const logoutBtn = document.getElementById('logoutBtn');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', async () => {
-                    try {
-                        // Sign out from Firebase Auth
-                        await signOut(auth);
-
-                        // Remove user info from localStorage
-                        localStorage.removeItem('currentUser');
-
-                        // Redirect to login page
-                        window.location.href = 'login.html';
-                    } catch (error) {
-                        console.error('Logout failed:', error);
-                        alert('Đăng xuất thất bại. Vui lòng thử lại.');
-                    }
-                });
-            }
-        });
-    </script>
+    <!-- Firebase Scripts -->
+    <script type="module" src="js/journal.js"></script>
 </body>
 </html>

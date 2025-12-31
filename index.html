@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BetterHeal - Nơi chữa lành tâm hồn</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navigation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -13,28 +14,30 @@
     <meta name="theme-color" content="#5b8a72">
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo">
+    <header class="premium-header">
+        <nav class="navbar-container">
+            <a href="index.html" class="logo-brand">
                 <i class="fas fa-heart"></i> BetterHeal
-            </div>
-            <ul class="nav-links">
-                <li><a href="#" class="nav-link active">Trang chủ</a></li>
-                <li><a href="feelings.html" class="nav-link">Nỗi lòng</a></li>
-                <li><a href="#" class="nav-link disabled">Nhật ký</a></li>
-                <li><a href="#" class="nav-link disabled">Thiền</a></li>
-                <li><a href="#" class="nav-link disabled">Tâm sự</a></li>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link-custom active"><i class="fas fa-home"></i> <span>Trang chủ</span></a></li>
+                <li class="nav-item"><a href="feelings.html" class="nav-link-custom"><i class="fas fa-comment-heart"></i> <span>Nỗi lòng</span></a></li>
+                <li class="nav-item"><a href="journal.html" class="nav-link-custom"><i class="fas fa-book-open"></i> <span>Nhật ký</span></a></li>
+                <li class="nav-item"><a href="foryou.html" class="nav-link-custom"><i class="fas fa-hand-holding-heart"></i> <span>For You</span></a></li>
+                <li class="nav-item"><a href="community.html" class="nav-link-custom"><i class="fas fa-comments"></i> <span>Tâm sự</span></a></li>
             </ul>
             <div id="authButtons" class="auth-container">
                 <a href="login.html" class="btn">Đăng nhập</a>
                 <a href="register.html" class="btn btn-secondary">Đăng ký</a>
             </div>
-            <div id="userInfo" class="user-info" style="display: none;">
-                <span class="username">User</span>
-                <a href="menu-password-manager.html" id="menuPasswordLink" class="btn btn-admin" style="display: none;">
-                    <i class="fas fa-lock"></i> Quản lý mật khẩu
+            <div id="userInfo" class="user-profile" style="display: none;">
+                <span class="user-name">User</span>
+                <a href="menu-password-manager.html" id="menuPasswordLink" class="admin-pill" style="display: none;">
+                    <i class="fas fa-shield-halved"></i> <span>Quản lý</span>
                 </a>
-                <button id="logoutBtn" class="logout-btn">Đăng xuất</button>
+                <button id="logoutBtn" class="logout-pill" title="Đăng xuất">
+                    <i class="fas fa-arrow-right-from-bracket"></i>
+                </button>
             </div>
         </nav>
     </header>
@@ -63,13 +66,13 @@
                         <p>Chia sẻ những cảm xúc, nỗi lòng của bạn và nhận được sự đồng cảm, hỗ trợ từ cộng đồng.</p>
                         <a href="feelings.html" class="feature-link">Khám phá ngay</a>
                     </div>
-                    <div class="feature-card disabled">
+                    <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-book"></i>
                         </div>
                         <h3>Nhật ký</h3>
                         <p>Ghi lại cảm xúc, suy nghĩ hàng ngày để theo dõi hành trình phát triển bản thân.</p>
-                        <span class="coming-soon">Sắp ra mắt</span>
+                        <a href="journal.html" class="feature-link">Bắt đầu viết</a>
                     </div>
                     <div class="feature-card disabled">
                         <div class="feature-icon">

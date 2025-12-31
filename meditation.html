@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thiền - BetterHeal</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navigation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -122,18 +123,30 @@
     </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <a href="dashboard.html" class="logo">
+    <header class="premium-header">
+        <nav class="navbar-container">
+            <a href="dashboard.html" class="logo-brand">
                 <i class="fas fa-heart"></i> BetterHeal
             </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link-custom"><i class="fas fa-home"></i> <span>Trang chủ</span></a></li>
+                <li class="nav-item"><a href="feelings.html" class="nav-link-custom"><i class="fas fa-comment-heart"></i> <span>Nỗi lòng</span></a></li>
+                <li class="nav-item"><a href="journal.html" class="nav-link-custom"><i class="fas fa-book-open"></i> <span>Nhật ký</span></a></li>
+                <li class="nav-item"><a href="foryou.html" class="nav-link-custom"><i class="fas fa-hand-holding-heart"></i> <span>For You</span></a></li>
+                <li class="nav-item"><a href="community.html" class="nav-link-custom"><i class="fas fa-comments"></i> <span>Tâm sự</span></a></li>
+            </ul>
             <div id="authButtons" class="auth-container">
                 <a href="login.html" class="btn">Đăng nhập</a>
                 <a href="register.html" class="btn btn-secondary">Đăng ký</a>
             </div>
-            <div id="userInfo" class="user-info" style="display: none;">
-                <span class="username">User</span>
-                <button id="logoutBtn" class="logout-btn">Đăng xuất</button>
+            <div id="userInfo" class="user-profile" style="display: none;">
+                <span class="user-name">User</span>
+                <a href="menu-password-manager.html" id="menuPasswordLink" class="admin-pill" style="display: none;">
+                    <i class="fas fa-shield-halved"></i> <span>Quản lý</span>
+                </a>
+                <button id="logoutBtn" class="logout-pill" title="Đăng xuất">
+                    <i class="fas fa-arrow-right-from-bracket"></i>
+                </button>
             </div>
         </nav>
     </header>
@@ -162,6 +175,7 @@
 
     <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script type="module" src="js/menu-password-check.js"></script>
     <script type="module" src="js/auth.js"></script>
     <script type="module">
         // Import Firebase modules

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BetterHeal - For You</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/navigation.css">
     <link rel="stylesheet" href="css/foryou.css">
     <link rel="stylesheet" href="css/fixed-attendance.css">
     <!-- Favicon -->
@@ -29,24 +30,35 @@
     </style>
 </head>
 <body>
-    <header>
-        <a href="dashboard.html" class="logo">
-            <i class="fas fa-heart"></i> BetterHeal
-        </a>
-        <div class="user-info" id="userInfo">
-            <span class="username">Xin chào, <span id="usernameDisplay">Người dùng</span></span>
-            <a href="admin-permissions.html" id="adminLink" class="admin-link" style="display: none;">
-                <i class="fas fa-user-shield"></i> Quản lý
+    <header class="premium-header">
+        <nav class="navbar-container">
+            <a href="dashboard.html" class="logo-brand">
+                <i class="fas fa-heart"></i> BetterHeal
             </a>
-            <button id="logoutBtn" class="logout-btn">
-                <i class="fas fa-sign-out-alt"></i> Đăng xuất
-            </button>
-        </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link-custom"><i class="fas fa-home"></i> <span>Trang chủ</span></a></li>
+                <li class="nav-item"><a href="feelings.html" class="nav-link-custom"><i class="fas fa-comment-heart"></i> <span>Nỗi lòng</span></a></li>
+                <li class="nav-item"><a href="journal.html" class="nav-link-custom"><i class="fas fa-book-open"></i> <span>Nhật ký</span></a></li>
+                <li class="nav-item"><a href="foryou.html" class="nav-link-custom active"><i class="fas fa-hand-holding-heart"></i> <span>For You</span></a></li>
+                <li class="nav-item"><a href="community.html" class="nav-link-custom"><i class="fas fa-comments"></i> <span>Tâm sự</span></a></li>
+            </ul>
+            <div class="nav-actions">
+                <div id="userInfo" class="user-profile" style="display: none;">
+                    <span class="user-name">Xin chào, <span id="usernameDisplay">Người dùng</span></span>
+                    <a href="menu-password-manager.html" id="menuPasswordLink" class="admin-pill" style="display: none;">
+                        <i class="fas fa-shield-halved"></i> <span>Quản lý</span>
+                    </a>
+                    <button id="logoutBtn" class="logout-pill" title="Đăng xuất">
+                        <i class="fas fa-arrow-right-from-bracket"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <main>
         <section class="welcome-section">
-            <h1>For You</h1>
+            <h1 class="section-title">Dành cho em</h1>
             <p>Những điều đặc biệt dành riêng cho bạn</p>
         </section>
 
@@ -106,6 +118,7 @@
     <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+    <script type="module" src="js/menu-password-check.js"></script>
     <script type="module" src="js/foryou.js"></script>
 </body>
 </html>

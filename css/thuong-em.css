@@ -7,10 +7,11 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
     min-height: 100vh;
     color: #333;
     overflow-x: hidden;
+    margin: 0;
 }
 
 /* Header */
@@ -38,7 +39,49 @@ header {
 }
 
 .logo:hover {
-    color: #e74c3c;
+    color: #f5576c;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0 1rem;
+}
+
+.nav-link {
+    color: #333;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #f5576c;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #f5576c;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
 }
 
 .user-info {
@@ -70,23 +113,79 @@ header {
     background-color: #c0392b;
 }
 
+/* Back Navigation */
+.back-navigation {
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    z-index: 2100;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.4rem;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 50px;
+    color: #f5576c;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+.back-btn i {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #f5576c;
+    color: white;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 25px rgba(245, 87, 108, 0.4);
+    border-color: #f5576c;
+}
+
+.back-btn:hover i {
+    transform: translateX(-4px);
+}
+
+.back-btn:active {
+    transform: translateY(0) scale(0.95);
+}
+
 /* Hero Section */
 .hero-section {
-    padding: 4rem 2rem;
+    padding: 6rem 2rem 4rem;
     text-align: center;
-    color: white;
+    color: #333;
+    background: transparent; /* Showromantic gradient */
 }
 
 .hero-content {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 3rem;
+    border-radius: 40px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
 }
 
 .animated-title {
-    font-size: 3rem;
-    margin-bottom: 2rem;
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: #f5576c; /* Deep pink/red */
+    text-shadow: 0 4px 10px rgba(245, 87, 108, 0.15);
     animation: fadeInDown 1s ease;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes fadeInDown {
@@ -102,8 +201,9 @@ header {
 
 .heart-animation {
     font-size: 4rem;
-    margin: 2rem 0;
-    animation: heartbeat 1.5s infinite;
+    margin: 1.5rem 0;
+    color: #f5576c; /* Pink heart */
+    animation: heartbeat 1.2s infinite;
 }
 
 @keyframes heartbeat {
@@ -111,7 +211,7 @@ header {
         transform: scale(1);
     }
     10%, 30% {
-        transform: scale(1.1);
+        transform: scale(1.15);
     }
     20%, 40% {
         transform: scale(1.05);
@@ -119,8 +219,10 @@ header {
 }
 
 .subtitle {
-    font-size: 1.3rem;
-    opacity: 0.95;
+    font-size: 1.4rem;
+    color: #666; /* Subtitle color */
+    font-weight: 500;
+    opacity: 1;
     animation: fadeIn 1.5s ease;
 }
 
@@ -129,7 +231,7 @@ header {
         opacity: 0;
     }
     to {
-        opacity: 0.95;
+        opacity: 1;
     }
 }
 

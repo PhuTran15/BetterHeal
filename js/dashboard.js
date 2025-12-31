@@ -24,48 +24,7 @@ const db = getDatabase(app);
 let attendanceData = {};
 let milestoneData = {};
 
-// Check if user is logged in
-function checkAuth() {
-    const currentUser = getCurrentUser();
-    if (!currentUser) {
-        window.location.href = 'login.html';
-        return false;
-    }
-    return true;
-}
-
-// Get current user from localStorage
-function getCurrentUser() {
-    return JSON.parse(localStorage.getItem('currentUser'));
-}
-
-// Update UI based on authentication state
-function updateUIOnAuth() {
-    const currentUser = getCurrentUser();
-    const userInfo = document.getElementById('userInfo');
-    const usernameDisplay = document.getElementById('usernameDisplay');
-
-    if (currentUser) {
-        if (userInfo) userInfo.style.display = 'flex';
-        if (usernameDisplay) {
-            // Xử lý tên người dùng để hiển thị thân thiện hơn
-            let displayName = 'Người dùng';
-
-            if (currentUser.displayName) {
-                displayName = currentUser.displayName;
-            } else if (currentUser.email) {
-                // Nếu là email, chỉ lấy phần tên trước @
-                displayName = currentUser.email.split('@')[0];
-            } else if (currentUser.username) {
-                displayName = currentUser.username;
-            }
-
-            usernameDisplay.textContent = displayName;
-        }
-    } else {
-        if (userInfo) userInfo.style.display = 'none';
-    }
-}
+import { checkAuth, getCurrentUser, logoutUser, updateUIOnAuth } from "./auth.js";
 
 // Kiểm tra và hiển thị badge thông báo
 function updateAttendanceBadge() {
@@ -180,19 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', async () => {
-            try {
-                // Sign out from Firebase Auth
-                await signOut(auth);
-
-                // Remove user info from localStorage
-                localStorage.removeItem('currentUser');
-
-                // Redirect to login page
-                window.location.href = 'login.html';
-            } catch (error) {
-                console.error('Logout failed:', error);
-                alert('Đăng xuất thất bại. Vui lòng thử lại.');
-            }
+            const result = await logoutUser();
+            if (result.success) window.location.href = 'login.html';
         });
     }
 });

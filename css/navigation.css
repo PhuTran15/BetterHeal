@@ -1,0 +1,214 @@
+/* BetterHeal Premium Navigation System */
+:root {
+    --nav-bg: rgba(255, 255, 255, 0.9);
+    --nav-height: 70px;
+}
+
+header.premium-header {
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.navbar-container {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.logo-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none !important;
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #5b8a72 !important;
+    letter-spacing: -0.8px;
+    transition: transform 0.3s ease;
+}
+
+.logo-brand:hover {
+    transform: scale(1.02);
+}
+
+.logo-brand i {
+    font-size: 2rem;
+    filter: drop-shadow(0 2px 4px rgba(91, 138, 114, 0.2));
+}
+
+.nav-menu {
+    display: flex !important;
+    list-style: none !important;
+    gap: 1rem;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: center;
+}
+
+.nav-item {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.nav-link-custom {
+    text-decoration: none !important;
+    color: #444 !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-link-custom:hover {
+    background-color: rgba(91, 138, 114, 0.08);
+    color: #5b8a72 !important;
+}
+
+.nav-link-custom.active {
+    background-color: #5b8a72;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(91, 138, 114, 0.3);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.4rem 0.4rem 0.4rem 1rem;
+    background: #f8faf9;
+    border-radius: 30px;
+    border: 1px solid #edf2f0;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    background-color: #5b8a72;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 6px rgba(91, 138, 114, 0.2);
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.logout-pill {
+    background-color: #ff6b6b;
+    color: white !important;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none !important;
+}
+
+.logout-pill:hover {
+    background-color: #fa5252;
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.premium-header {
+    animation: fadeInDown 0.6s ease-out;
+}
+
+.nav-link-custom::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.nav-link-custom.active::after {
+    width: 20px;
+}
+
+.admin-pill {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white !important;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+@media (max-width: 1024px) {
+    .nav-link-custom span {
+        display: none;
+    }
+    .nav-link-custom {
+        padding: 0.8rem;
+    }
+    .nav-link-custom i {
+        font-size: 1.2rem;
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none !important; /* Will need a mobile toggle later */
+    }
+}

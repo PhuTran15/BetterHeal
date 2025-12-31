@@ -37,7 +37,7 @@ let isAnimating = false;
 // Thiết lập kích thước canvas
 function resizeCanvas() {
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight - 80;
+    canvas.height = window.innerHeight;
 }
 
 // Hàm tạo hình trái tim (phương trình toán học)

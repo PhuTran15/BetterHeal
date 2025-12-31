@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trái tim to bự - BetterHeal</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/navigation.css">
     <link rel="stylesheet" href="css/trai-tim-to.css">
     <link rel="stylesheet" href="css/fixed-attendance.css">
     <!-- Favicon -->
@@ -29,11 +30,12 @@
     </style>
 </head>
 <body>
-    <header>
-        <a href="foryou.html" class="logo">
-            <i class="fas fa-arrow-left"></i> Quay lại
+    <div class="back-navigation">
+        <a href="dashboard.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> <span>Quay lại</span>
         </a>
-        <div class="controls">
+    </div>
+        <div class="animation-controls">
             <button id="playBtn" class="control-btn">
                 <i class="fas fa-play"></i> Bắt đầu
             </button>
@@ -41,13 +43,6 @@
                 <i class="fas fa-redo"></i> Làm lại
             </button>
         </div>
-        <div class="user-info" id="userInfo">
-            <span class="username">Xin chào, <span id="usernameDisplay">Người dùng</span></span>
-            <button id="logoutBtn" class="logout-btn">
-                <i class="fas fa-sign-out-alt"></i> Đăng xuất
-            </button>
-        </div>
-    </header>
 
     <main>
         <div class="canvas-container">
@@ -72,6 +67,7 @@
     <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+    <script type="module" src="js/menu-password-check.js"></script>
     <script type="module" src="js/trai-tim-to.js"></script>
 </body>
 </html>

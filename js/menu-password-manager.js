@@ -4,13 +4,14 @@ import { getDatabase, ref, get, set, update } from 'https://www.gstatic.com/fire
 
 // Firebase config
 const firebaseConfig = {
-    apiKey: "AIzaSyDSzFT32QJNv_0H_jLw6CASZdD0gJTE-Uw",
-    authDomain: "betterheal-d59e9.firebaseapp.com",
-    databaseURL: "https://betterheal-d59e9-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "betterheal-d59e9",
-    storageBucket: "betterheal-d59e9.firebasestorage.app",
-    messagingSenderId: "1069393133390",
-    appId: "1:1069393133390:web:e0e8e8e8e8e8e8e8e8e8e8"
+    apiKey: "AIzaSyCEK54N506sR3dkYdhXtrP1mQPjz1QfVLg",
+    authDomain: "betterheal-117ed.firebaseapp.com",
+    databaseURL: "https://betterheal-117ed-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "betterheal-117ed",
+    storageBucket: "betterheal-117ed.firebasestorage.app",
+    messagingSenderId: "482091866987",
+    appId: "1:482091866987:web:51e473cd51db4f632b0a2e",
+    measurementId: "G-HSBSJ63EXT"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -20,11 +21,16 @@ const db = getDatabase(app);
 // Menu list
 const menus = [
     { id: 'feelings', name: 'Nỗi lòng', icon: 'fa-heart', url: 'feelings.html' },
-    { id: 'diary', name: 'Nhật ký', icon: 'fa-book', url: 'diary.html' },
+    { id: 'diary', name: 'Nhật ký', icon: 'fa-book', url: 'journal.html' },
     { id: 'meditation', name: 'Thiền', icon: 'fa-spa', url: 'meditation.html' },
-    { id: 'chat', name: 'Tâm sự', icon: 'fa-comments', url: 'chat.html' },
+    { id: 'chat', name: 'Tâm sự', icon: 'fa-comments', url: 'community.html' },
+    { id: 'attendance', name: 'Điểm danh', icon: 'fa-calendar-check', url: 'attendance.html' },
+    { id: 'foryou', name: 'For You', icon: 'fa-gift', url: 'foryou.html' },
+    { id: 'trai-tim-to', name: 'Trái tim to', icon: 'fa-heart-pulse', url: 'trai-tim-to.html' },
+    { id: 'thuong-em', name: 'Thương em', icon: 'fa-dove', url: 'thuong-em.html' },
     { id: 'christmas', name: 'Giáng sinh', icon: 'fa-tree', url: 'merry-christmas.html' },
-    { id: 'christmas-wishes', name: 'Điều ước Giáng sinh (Admin)', icon: 'fa-star', url: 'christmas-wishes-admin.html' }
+    { id: 'christmas-wishes', name: 'Điều ước (Admin)', icon: 'fa-star', url: 'christmas-wishes-admin.html' },
+    { id: 'admin-permissions', name: 'Quyền Admin', icon: 'fa-user-shield', url: 'admin-permissions.html' }
 ];
 
 let currentEditingMenu = null;
