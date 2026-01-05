@@ -6,6 +6,9 @@
     <title>Tâm sự - BetterHeal</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/navigation.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -141,10 +144,19 @@
 
         .coming-soon i {
             font-size: 5rem;
-            color: var(--primary-color);
+            color: #ff84a1; /* Romantic pink */
             margin-bottom: 2.5rem;
             display: block;
             opacity: 0.8;
+            animation: heartBeat 2s infinite;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
         }
     </style>
 </head>
@@ -204,7 +216,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2023 BetterHeal. Tất cả quyền được bảo lưu.</p>
+            <i>Dâng cho người với tất cả sự dịu dàng ta có.</i>
         </div>
     </footer>
 

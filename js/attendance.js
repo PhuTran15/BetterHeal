@@ -31,13 +31,35 @@ const streakCountElement = document.getElementById('streakCount');
 const totalAttendanceElement = document.getElementById('totalAttendance');
 const attendanceModal = document.getElementById('attendanceModal');
 const closeModalBtn = document.getElementById('closeModal');
-const usernameDisplay = document.getElementById('usernameDisplay');
+const usernameDisplay = document.getElementById('usernameDisplay') || document.getElementById('userName');
 const logoutBtn = document.getElementById('logoutBtn');
 const reward1 = document.getElementById('reward1');
 const reward2 = document.getElementById('reward2');
 const reward3 = document.getElementById('reward3');
 const customToast = document.getElementById('customToast');
 const attendanceBadge = document.getElementById('attendanceBadge');
+
+// Biến lưu trữ lời nhắn từ file JSON
+let gentleQuotes = [];
+
+// Tải lời nhắn từ file JSON
+async function loadQuotes() {
+    try {
+        const response = await fetch('js/quotes.json');
+        if (!response.ok) throw new Error('Không thể tải file lời nhắn');
+        gentleQuotes = await response.val ? await response.val() : await response.json();
+        console.log('Đã tải kho báu lời nhắn:', gentleQuotes.length, 'câu');
+        displayRandomQuote();
+    } catch (error) {
+        console.error('Lỗi khi tải lời nhắn:', error);
+        // Lời nhắn dự phòng nếu lỗi tải file
+        gentleQuotes = [{
+            "content": "Sự dịu dàng là món quà quý giá nhất mà đôi ta dành tặng cho nhau mỗi ngày.",
+            "author": "BetterHeal"
+        }];
+        displayRandomQuote();
+    }
+}
 
 // Confirm Modal Elements
 const confirmModal = document.getElementById('confirmModal');
@@ -168,7 +190,13 @@ onAuthStateChanged(auth, (user) => {
             displayName = user.email.split('@')[0];
         }
 
-        usernameDisplay.textContent = displayName;
+        if (usernameDisplay) {
+            usernameDisplay.textContent = displayName;
+        } else {
+            const userNameAlt = document.getElementById('userName');
+            if (userNameAlt) userNameAlt.textContent = displayName;
+        }
+        
         console.log('Loading attendance data for user:', user.uid);
         loadAttendanceData();
     } else {
@@ -200,7 +228,6 @@ function loadAttendanceData() {
         console.log('Attendance data loaded:', attendanceData);
         updateCalendar();
         updateStats();
-        updateRewards();
         checkTodayStatus();
     }, (error) => {
         console.error('Error loading attendance data:', error);
@@ -495,20 +522,16 @@ function checkTodayStatus() {
     updateAttendanceBadge();
 }
 
-// Update rewards based on streak
-function updateRewards() {
-    const streak = calculateStreak();
-
-    if (streak >= 3) {
-        reward1.innerHTML = '<i class="fas fa-unlock" style="color: var(--success-color);"></i>';
-    }
-
-    if (streak >= 7) {
-        reward2.innerHTML = '<i class="fas fa-unlock" style="color: var(--success-color);"></i>';
-    }
-
-    if (streak >= 30) {
-        reward3.innerHTML = '<i class="fas fa-unlock" style="color: var(--success-color);"></i>';
+// Hiển thị một lời nhắn ngẫu nhiên
+function displayRandomQuote() {
+    const quoteElement = document.getElementById('dailyQuote');
+    const authorElement = document.querySelector('.quote-author');
+    
+    if (quoteElement && gentleQuotes.length > 0) {
+        const randomIndex = Math.floor(Math.random() * gentleQuotes.length);
+        const randomQuote = gentleQuotes[randomIndex];
+        quoteElement.textContent = randomQuote.content;
+        if (authorElement) authorElement.textContent = randomQuote.author;
     }
 }
 
@@ -533,7 +556,7 @@ async function checkIn() {
         checkTodayStatus();
         updateCalendar();
         updateStats();
-        updateRewards();
+        displayRandomQuote(); // Hiển thị lời nhắn mới khi điểm danh
         updateAttendanceBadge(); // Cập nhật badge thông báo
     } catch (error) {
         console.error('Check-in error:', error);
@@ -743,14 +766,9 @@ window.addEventListener('click', (event) => {
 // Initialize calendar
 updateCalendar();
 
-// Hiển thị badge thông báo khi trang được tải
+// Hiển thị badge và lời nhắn khi trang được tải
 setTimeout(() => {
     updateAttendanceBadge();
-    console.log('Badge updated on page load');
+    loadQuotes(); // Tải và hiển thị lời nhắn
+    console.log('UI updated on page load');
 }, 1000);
-
-// Thêm một lần nữa để đảm bảo badge hiển thị sau khi dữ liệu được tải
-setTimeout(() => {
-    updateAttendanceBadge();
-    console.log('Badge updated again after delay');
-}, 3000);

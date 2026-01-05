@@ -3,13 +3,16 @@
     --primary-color: #5b8a72; /* Calming green */
     --secondary-color: #98b4aa; /* Soft sage */
     --accent-color: #f2d096; /* Warm yellow */
+    --love-color: #ff84a1; /* Romantic Pink */
+    --love-soft: #fff0f3; /* Soft Rose Background */
+    --love-deep: #fa5252; /* Deep Love Red */
     --text-color: #2c3639; /* Dark gray */
     --light-color: #f8f9fa; /* Off-white */
     --error-color: #e76f51; /* Soft coral for errors */
     --success-color: #2a9d8f; /* Teal for success */
-    --border-radius: 8px;
-    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
+    --border-radius: 16px; /* Softer corners */
+    --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05); /* Softer shadows */
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -19,10 +22,10 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Outfit', 'Segoe UI', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: #f0f5f1;
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
     min-height: 100vh;
     display: flex;
     flex-direction: column;

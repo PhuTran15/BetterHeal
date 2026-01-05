@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Điểm danh - BetterHeal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/navigation.css">
     <link rel="stylesheet" href="css/attendance.css">
@@ -37,7 +40,11 @@
                 <i class="fas fa-bars"></i>
             </button>
             <a href="dashboard.html" class="logo-brand">
-                <i class="fas fa-heart"></i> BetterHeal
+                <div style="position: relative; display: flex; align-items: center;">
+                    <i class="fas fa-heart"></i>
+                    <div id="attendanceBadge" style="position: absolute; top: -8px; right: -8px; background-color: #e74c3c; color: white; width: 16px; height: 16px; border-radius: 50%; display: none; justify-content: center; align-items: center; font-size: 10px; font-weight: bold; border: 2px solid white;">!</div>
+                </div>
+                <span>BetterHeal</span>
             </a>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="dashboard.html" class="nav-link-custom"><i class="fas fa-home"></i> <span>Trang chủ</span></a></li>
@@ -70,8 +77,8 @@
 
     <main>
         <section class="attendance-header">
-            <h1>Điểm danh hàng ngày</h1>
-            <p>Điểm danh mỗi ngày để nhận phần thưởng và theo dõi quá trình chữa lành của bạn</p>
+            <h1>Lịch yêu thương</h1>
+            <p>Mỗi ngày trôi qua là một cánh hoa tình yêu nảy nở trong hành trình của chúng ta.</p>
         </section>
 
         <section class="attendance-container">
@@ -130,57 +137,29 @@
             </div>
         </section>
 
-        <section class="rewards-section">
-            <h2>Phần thưởng</h2>
-            <div class="rewards-container">
-                <div class="reward-card">
-                    <div class="reward-icon">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="reward-info">
-                        <h3>3 ngày liên tiếp</h3>
-                        <p>Huy hiệu "Khởi đầu tốt"</p>
-                    </div>
-                    <div class="reward-status" id="reward1">
-                        <i class="fas fa-lock"></i>
-                    </div>
+        <section class="quote-section">
+            <div class="quote-card">
+                <div class="quote-decoration">
+                    <i class="fas fa-leaf"></i>
                 </div>
-                <div class="reward-card">
-                    <div class="reward-icon">
-                        <i class="fas fa-medal"></i>
-                    </div>
-                    <div class="reward-info">
-                        <h3>7 ngày liên tiếp</h3>
-                        <p>Huy hiệu "Kiên trì"</p>
-                    </div>
-                    <div class="reward-status" id="reward2">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                </div>
-                <div class="reward-card">
-                    <div class="reward-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="reward-info">
-                        <h3>30 ngày liên tiếp</h3>
-                        <p>Huy hiệu "Chuyên gia chữa lành"</p>
-                    </div>
-                    <div class="reward-status" id="reward3">
-                        <i class="fas fa-lock"></i>
-                    </div>
+                <div class="quote-content">
+                    <i class="fas fa-quote-left"></i>
+                    <p id="dailyQuote">Sự dịu dàng là món quà quý giá nhất mà đôi ta dành tặng cho nhau mỗi ngày.</p>
+                    <div class="quote-divider"></div>
+                    <span class="quote-author">Trạm dừng chân của sự dịu dàng</span>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2023 BetterHeal. Tất cả quyền được bảo lưu.</p>
+        <i>Dâng cho người với tất cả sự dịu dàng ta có.</i>
     </footer>
 
     <div id="attendanceModal" class="modal">
         <div class="modal-content">
             <div class="success-animation">
-                <i class="fas fa-calendar-check"></i>
+                <i class="fas fa-heart"></i>
             </div>
             <h2>Điểm danh thành công!</h2>
             <p>Bạn đã điểm danh ngày hôm nay. Hãy quay lại vào ngày mai để tiếp tục chuỗi ngày của bạn.</p>
