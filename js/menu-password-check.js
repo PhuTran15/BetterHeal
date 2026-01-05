@@ -255,16 +255,22 @@ function addPasswordModalStyles() {
 
         .password-input-group {
             position: relative;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .password-input-group input {
             width: 100%;
-            padding: 0.9rem 3rem 0.9rem 1rem;
+            padding: 0.9rem 3.5rem 0.9rem 1rem;
             border: 2px solid #e0e0e0;
             border-radius: 12px;
             font-size: 1.1rem;
             transition: all 0.3s ease;
             box-sizing: border-box;
+            background: white;
+            color: #333;
+            display: block;
         }
 
         .password-input-group input:focus {
@@ -286,19 +292,30 @@ function addPasswordModalStyles() {
 
         .password-input-group button {
             position: absolute;
-            right: 8px;
+            right: 5px;
             top: 50%;
             transform: translateY(-50%);
-            background: none;
-            border: none;
+            background: transparent !important;
+            border: none !important;
             color: #666;
             cursor: pointer;
-            padding: 0.5rem;
+            padding: 8px;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
             transition: all 0.3s ease;
+            z-index: 10;
+            width: 44px;
+            height: 44px;
+            box-sizing: border-box;
+            border-radius: 50%;
+            margin: 0;
+            left: auto; /* Reset any inheritance */
         }
 
         .password-input-group button:hover {
             color: #5b8a72;
+            background: rgba(0, 0, 0, 0.05) !important;
         }
 
         .password-error {

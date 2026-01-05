@@ -285,6 +285,7 @@ header {
     line-height: 1.8;
     color: #666;
     margin-bottom: 1rem;
+    white-space: pre-wrap;
 }
 
 /* Timeline */
@@ -507,6 +508,7 @@ header {
     color: #666;
     line-height: 1.8;
     margin-bottom: 0.5rem;
+    white-space: pre-wrap;
 }
 
 .timeline-item-image {

@@ -241,6 +241,45 @@ main {
     transform: scale(1.05);
 }
 
+.dalat-card {
+    background: linear-gradient(135deg, #1d4030 0%, #5b8a72 100%);
+    color: white;
+}
+
+.dalat-card::before {
+    background: linear-gradient(90deg, #5b8a72 0%, #90b3a1 100%);
+}
+
+.dalat-card::after {
+    content: '🌲';
+    position: absolute;
+    font-size: 8rem;
+    opacity: 0.1;
+    right: -20px;
+    bottom: -20px;
+    animation: sway 4s ease-in-out infinite;
+}
+
+@keyframes sway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+.dalat-card h2,
+.dalat-card p {
+    color: white;
+}
+
+.dalat-card a {
+    background-color: white;
+    color: #1d4030;
+}
+
+.dalat-card a:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.05);
+}
+
 .coming-soon {
     opacity: 0.7;
     cursor: default;

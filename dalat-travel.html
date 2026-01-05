@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaLat Travel - BetterHeal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/dalat-travel.css">
+    <link rel="stylesheet" href="css/fixed-attendance.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <meta name="theme-color" content="#5b8a72">
+    <style>
+        .hero-section {
+            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3)), 
+                              url('img/dalatcover.png?v=1') !important;
+            background-size: cover !important;
+            background-position: center bottom !important;
+        }
+    </style>
+</head>
+<body>
+    <header class="premium-header">
+        <nav class="navbar-container">
+            <button class="mobile-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="dashboard.html" class="logo-brand">
+                <i class="fas fa-heart"></i> BetterHeal
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link-custom"><i class="fas fa-home"></i> <span>Trang chủ</span></a></li>
+                <li class="nav-item"><a href="feelings.html" class="nav-link-custom"><i class="fas fa-heart-pulse"></i> <span>Nỗi lòng</span></a></li>
+                <li class="nav-item"><a href="journal.html" class="nav-link-custom"><i class="fas fa-book-open"></i> <span>Nhật ký</span></a></li>
+                <li class="nav-item"><a href="foryou.html" class="nav-link-custom active"><i class="fas fa-hand-holding-heart"></i> <span>For You</span></a></li>
+                <li class="nav-item"><a href="community.html" class="nav-link-custom"><i class="fas fa-comments"></i> <span>Tâm sự</span></a></li>
+            </ul>
+            <div class="nav-actions">
+                <div id="authButtons" class="auth-container" style="display: none;">
+                    <a href="login.html" class="btn">Đăng nhập</a>
+                    <a href="register.html" class="btn btn-secondary">Đăng ký</a>
+                </div>
+                <div id="userInfo" class="user-profile" style="display: none;">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <span class="user-name" id="userName">User</span>
+                    <button id="logoutBtn" class="logout-pill" title="Đăng xuất">
+                        <i class="fas fa-arrow-right-from-bracket"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="back-navigation">
+        <a href="foryou.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> <span>Quay lại</span>
+        </a>
+    </div>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="animated-title">DaLat Travel</h1>
+                <p class="subtitle">Kế hoạch cho chuyến hành trình tình yêu tại thành phố ngàn hoa 🌸</p>
+                <div class="trip-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span id="locationCount">0</span> Địa điểm
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span id="planCount">0</span> Hoạt động
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="travel-container">
+            <div class="travel-tabs">
+                <button class="tab-btn active" data-tab="itinerary">
+                    <i class="fas fa-route"></i> Lịch trình
+                </button>
+                <button class="tab-btn" data-tab="locations">
+                    <i class="fas fa-map-marked-alt"></i> Địa điểm định đến
+                </button>
+                <button class="tab-btn" data-tab="checklist">
+                    <i class="fas fa-clipboard-list"></i> Chuẩn bị
+                </button>
+                <button class="tab-btn" data-tab="notes">
+                    <i class="fas fa-edit"></i> Ghi chú
+                </button>
+            </div>
+
+            <div class="tab-content active" id="itinerary">
+                <div class="section-header">
+                    <h2><i class="fas fa-clock"></i> Thời gian biểu</h2>
+                    <button class="add-btn" onclick="openModal('plan')">
+                        <i class="fas fa-plus"></i> Thêm hoạt động
+                    </button>
+                </div>
+                <div class="itinerary-list" id="itineraryList">
+                    <!-- Sẽ được load từ Firebase -->
+                    <div class="empty-state">
+                        <i class="fas fa-plane-departure"></i>
+                        <p>Chưa có lịch trình nào được lập...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="locations">
+                <div class="section-header">
+                    <h2><i class="fas fa-heart"></i> Các nơi định đến</h2>
+                    <button class="add-btn" onclick="openModal('location')">
+                        <i class="fas fa-plus"></i> Thêm địa điểm
+                    </button>
+                </div>
+                <div class="location-grid" id="locationGrid">
+                    <!-- Sẽ được load từ Firebase -->
+                </div>
+            </div>
+
+            <div class="tab-content" id="checklist">
+                <div class="section-header">
+                    <h2><i class="fas fa-tasks"></i> Danh sách cần chuẩn bị</h2>
+                    <button class="add-btn" onclick="openModal('checklist')">
+                        <i class="fas fa-plus"></i> Thêm đồ cần chuẩn bị
+                    </button>
+                </div>
+                <div class="checklist-container" id="checklistContainer">
+                    <!-- Sẽ được load từ Firebase -->
+                </div>
+            </div>
+            <div class="tab-content" id="notes">
+                <div class="section-header">
+                    <h2><i class="fas fa-edit"></i> Ghi chú chung</h2>
+                    <button class="add-btn" id="saveNotesBtn">
+                        <i class="fas fa-save"></i> Lưu ghi chú
+                    </button>
+                </div>
+                <div class="notes-container">
+                    <textarea id="travelNotes" class="notes-textarea" placeholder="Viết lại những lưu ý, tâm tư hay bất cứ điều gì cho chuyến đi này..."></textarea>
+                    <div id="notesStatus" class="notes-status"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal cho Plan/Location/Checklist -->
+    <div class="travel-modal" id="travelModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Thêm mới</h3>
+                <button class="close-modal" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="travelForm">
+                    <input type="hidden" id="itemType">
+                    <input type="hidden" id="itemId">
+                    
+                    <div id="planFields" class="form-fields">
+                        <div class="form-group">
+                            <label>Ngày</label>
+                            <input type="date" id="planDate" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label>Thời gian</label>
+                            <input type="time" id="planTime" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label>Hoạt động</label>
+                            <input type="text" id="planTitle" class="form-input" placeholder="VD: Đi cà phê Túi Mơ To">
+                        </div>
+                        <div class="form-group">
+                            <label>Ghi chú</label>
+                            <textarea id="planDesc" class="form-input" placeholder="Chi tiết hoạt động..."></textarea>
+                        </div>
+                    </div>
+
+                    <div id="locationFields" class="form-fields" style="display: none;">
+                        <div class="form-group">
+                            <label>Tên địa điểm</label>
+                            <input type="text" id="locTitle" class="form-input" placeholder="VD: Hồ Tuyền Lâm">
+                        </div>
+                        <div class="form-group">
+                            <label>Link ảnh (nếu có)</label>
+                            <input type="text" id="locImage" class="form-input" placeholder="https://...">
+                        </div>
+                        <div class="form-group">
+                            <label>Lý do muốn đến</label>
+                            <textarea id="locDesc" class="form-input" placeholder="Tại sao hai đứa mình muốn đến đây?"></textarea>
+                        </div>
+                    </div>
+
+                    <div id="checklistFields" class="form-fields" style="display: none;">
+                        <div class="form-group">
+                            <label>Tên đồ vật</label>
+                            <input type="text" id="checkTitle" class="form-input" placeholder="VD: Áo khoác dày">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal()">Hủy</button>
+                <button class="btn-save" id="saveTravelBtn">Lưu lại</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Scripts -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+    <script type="module" src="js/dalat-travel.js"></script>
+    <script src="js/navigation.js"></script>
+
+    <div class="fixed-attendance-btn" id="fixedAttendanceBtn">
+        <a href="attendance.html" title="Điểm danh hàng ngày">
+            <div style="position: relative;">
+                <i class="fas fa-calendar-check"></i>
+                <div id="attendanceBadge" style="position: absolute; top: -10px; right: -10px; background-color: #e74c3c; color: white; width: 18px; height: 18px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 12px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2); animation: pulse 1.5s infinite;">!</div>
+            </div>
+            <span>Điểm danh</span>
+        </a>
+    </div>
+</body>
+</html>
