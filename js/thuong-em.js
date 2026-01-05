@@ -416,6 +416,30 @@ function fileToBase64(file) {
     });
 }
 
+// Nén ảnh để giảm dung lượng trước khi lưu vào DB
+async function compressImage(base64Str, maxWidth = 1200, quality = 0.7) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.src = base64Str;
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+
+            if (width > maxWidth) {
+                height = (maxWidth / width) * height;
+                width = maxWidth;
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+    });
+}
+
 // Show caption modal for image
 function showCaptionModal(imageData, existingCaption = '', isEdit = false) {
     return new Promise((resolve) => {
@@ -517,16 +541,22 @@ async function uploadImages(files) {
         try {
             console.log('Processing file:', file.name);
 
-            // Check file size (limit to 1MB for base64)
-            if (file.size > 1024 * 1024) {
-                showToast(`File ${file.name} quá lớn (tối đa 1MB)`, 'error');
+            // Tăng giới hạn lên 10MB
+            if (file.size > 10 * 1024 * 1024) {
+                showToast(`File ${file.name} quá lớn (tối đa 10MB)`, 'error');
                 continue;
             }
 
             // Convert to base64
             console.log('Converting to base64...');
-            const base64 = await fileToBase64(file);
-            console.log('Conversion complete');
+            let base64 = await fileToBase64(file);
+            
+            // Nén ảnh nếu dung lượng gốc lớn
+            if (file.size > 500 * 1024) {
+                console.log('Compressing image...');
+                base64 = await compressImage(base64);
+            }
+            console.log('Processing complete');
 
             // Show caption modal
             const result = await showCaptionModal(base64);
@@ -973,14 +1003,20 @@ async function handleMilestoneImageUpload(e) {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Check file size (1MB limit)
-    if (file.size > 1024 * 1024) {
-        showToast('Hình ảnh quá lớn (tối đa 1MB)', 'error');
+    // Tăng giới hạn lên 10MB
+    if (file.size > 10 * 1024 * 1024) {
+        showToast('Hình ảnh quá lớn (tối đa 10MB)', 'error');
         return;
     }
 
     try {
-        const base64 = await fileToBase64(file);
+        let base64 = await fileToBase64(file);
+        
+        // Nén ảnh nếu cần
+        if (file.size > 500 * 1024) {
+            base64 = await compressImage(base64);
+        }
+        
         currentMilestoneImage = base64;
 
         // Show preview
